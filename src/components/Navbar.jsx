@@ -27,13 +27,13 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Home</a>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <a>Assignments</a>
+              <NavLink to="/assignments">Assignments</NavLink>
             </li>
             <li>
-              <a>Pending Assignments</a>
+              <NavLink to="/pendingAssignments">Pending Assignments</NavLink>
             </li>
           </ul>
         </div>
@@ -42,13 +42,13 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Home</a>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <a>Assignments</a>
+            <NavLink to="/assignments">Assignments</NavLink>
           </li>
           <li>
-            <a>Pending Assignments</a>
+            <NavLink to="/pendingAssignments">Pending Assignments</NavLink>
           </li>
         </ul>
       </div>
@@ -75,10 +75,10 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <Link>Create Assignments</Link>
+              <Link to="/createAssignments">Create Assignments</Link>
             </li>
             <li>
-              <Link>My Attempted Assignments</Link>
+              <Link to="/attemptAssignments">My Attempted Assignments</Link>
             </li>
           </ul>
         </div>
