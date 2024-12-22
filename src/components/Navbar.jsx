@@ -5,7 +5,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
-  const {user} = useContext(AuthContext);
+  const { user, logoutUser } = useContext(AuthContext);
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -57,38 +57,38 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-      <div className="navbar-end">
-            {user && (
-              <div
-                data-tooltip-id="my-tooltip"
-                className="h-10 w-10 rounded-full"
-              >
-                <img
-                  className="rounded-full"
-                  src={user?.photoURL}
-                  alt="User Avatar"
-                />
-                <Tooltip id="my-tooltip">
-                  <div className="dark:text-white">{user?.displayName}</div>
-                </Tooltip>
-              </div>
-            )}
-            {user && user?.email ? (
-              <button
-                // onClick={logOut}
-                className="btn btn-ghost dark:text-white"
-              >
-                Logout
-              </button>
-            ) : (
-              <NavLink
-                to="/login"
-                className="btn dark:bg-gray-800 dark:text-white"
-              >
-                Login
-              </NavLink>
-            )}
-          </div>
+        <div className="navbar-end">
+          {user && (
+            <div
+              data-tooltip-id="my-tooltip"
+              className="h-10 w-10 rounded-full"
+            >
+              <img
+                className="rounded-full"
+                src={user?.photoURL}
+                alt="User Avatar"
+              />
+              <Tooltip id="my-tooltip">
+                <div className="dark:text-white">{user?.displayName}</div>
+              </Tooltip>
+            </div>
+          )}
+          {user && user?.email ? (
+            <button
+              onClick={logoutUser}
+              className="btn btn-ghost dark:text-white"
+            >
+              Logout
+            </button>
+          ) : (
+            <NavLink
+              to="/login"
+              className="btn dark:bg-gray-800 dark:text-white"
+            >
+              Login
+            </NavLink>
+          )}
+        </div>
 
         {/* image dropdown */}
         <div className="dropdown dropdown-end z-50">

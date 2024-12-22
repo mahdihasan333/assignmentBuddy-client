@@ -1,8 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import google from "../../assets/image/Google.webp";
+import { AuthContext } from '../../providers/AuthProvider';
+import { useContext } from 'react';
+import Swal from 'sweetalert2';
 
 
 const Login = () => {
+  const {loginUser, setUser, loginWithGoogle} = useContext(AuthContext);
+  const location = useLocation()
+  const navigate = useNavigate()
 
 
 
@@ -10,7 +16,59 @@ const Login = () => {
   const handleSignIn = e => {
     e.preventDefault();
     const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    // user login
+    loginUser(email, password)
+    .then(result => {
+      const user = result.user;
+      setUser(user);
+      Swal.fire({
+        title: "Success!",
+        text: "Login successful",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+      navigate(location?.state ? location.state : '/')
+      console.log(user)
+    })
+    .catch(error => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error.message}`,
+      });
+    })
   }
+
+
+  // Google login
+
+  const handleGoogleLogin = () => {
+    loginWithGoogle()
+    .then(result => {
+      const user = result.user;
+      setUser(user);
+      Swal.fire({
+        title: "Success!",
+        text: "Google Login successful",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+      navigate(location?.state ? location.state : '/')
+      console.log(user)
+    })
+    .catch(error => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error.message}`,
+      });
+    })
+
+  }
+
     return (
         <div className="bg-base-200">
       <div className="hero-content flex-col">
@@ -44,9 +102,9 @@ const Login = () => {
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>
-            <div  className="btn flex">
+            <div onClick={handleGoogleLogin} className="btn flex">
               <img className="h-10 w-10 rounded-full" src={google} alt="" />
-              <p>Login With Google</p>
+              <span>Login With Google</span>
             </div>
           </form>
           <p className="text-center p-5 font-semibold">
