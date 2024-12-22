@@ -3,13 +3,13 @@ import registerLottieData from "../../assets/lottie/Register.json";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
-  // const {userName} = useContext(AuthContext);
+  const {createNewUser, setUser} = useContext(AuthContext);
 
   const handleSignUp = (e) => {
     e.preventDefault();
-
 
     const form = e.target;
 
@@ -17,9 +17,41 @@ const Register = () => {
     const email = form.email.value;
     const photo = form.photo.value;
     const password = form.password.value;
-    console.log(name, email, photo, password);
-  }
 
+    if (password.length < 6) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops",
+        text: "Password must be 6 character!",
+      });
+      return;
+    }
+
+    const regex = /^(?=.*[A-Z])(?=.*[a-z]).+$/;
+
+    if (!regex.test(password)) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops",
+        text: "Password Must have an Uppercase letter and a Lowercase letter in the password!",
+      });
+      return;
+    }
+
+    // authentication
+    createNewUser(email, password)
+    .then(result => {
+      const user = result.user;
+      setUser(user);
+      console.log(user)
+    })
+    .catch(error => {
+      console.log(error.message)
+    })
+
+
+    console.log(name, email, photo, password);
+  };
 
   return (
     // <div className="hero bg-base-200 min-h-screen">
@@ -95,7 +127,6 @@ const Register = () => {
                 required
               />
             </div>
-            console.log(name)
             <div className="form-control">
               <label className="label">
                 <span className="label-text">PhotoURL</span>
