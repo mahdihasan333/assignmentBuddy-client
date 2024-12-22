@@ -9,10 +9,10 @@ import 'swiper/css/navigation'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import Slide from './Slide'
 
-import bgimg1 from '../assets/image/slider1.avif'
-import bgimg2 from '../assets/image/slider2.avif'
-import bgimg3 from '../assets/image/slider3.jpg'
-import bgimg4 from '../assets/image/slider4.avif'
+import slider1 from '../assets/image/slider1.avif'
+import slider2 from '../assets/image/slider2.avif'
+import slider3 from '../assets/image/slider3.jpg'
+import slider4 from '../assets/image/slider4.avif'
 
 
 
@@ -36,25 +36,25 @@ const Banner = () => {
       >
         <SwiperSlide>
           <Slide
-            image={bgimg1}
+            image={slider1}
             text="Learn Together, Succeed Together!"
           />
         </SwiperSlide>
         <SwiperSlide>
           <Slide
-            image={bgimg2}
+            image={slider2}
             text="Your Gateway to Collaborative Success"
           />
         </SwiperSlide>
         <SwiperSlide>
           <Slide
-            image={bgimg3}
+            image={slider3}
             text="Join Hands, Share Knowledge, Excel Together"
           />
         </SwiperSlide>
         <SwiperSlide>
           <Slide
-            image={bgimg4}
+            image={slider4}
             text="Share Ideas, Solve Problems, Succeed"
           />
         </SwiperSlide>

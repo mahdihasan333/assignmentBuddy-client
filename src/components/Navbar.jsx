@@ -36,9 +36,11 @@ const Navbar = () => {
             <li>
               <NavLink to="/assignments">Assignments </NavLink>
             </li>
-            <li>
-              <NavLink to="/pendingAssignments">Pending Assignments</NavLink>
-            </li>
+            {user && (
+              <li>
+                <NavLink to="/pendingAssignments">Pending Assignments</NavLink>
+              </li>
+            )}
           </ul>
         </div>
         <a className="btn btn-ghost text-xl">AssignmentBuddy</a>
@@ -51,15 +53,17 @@ const Navbar = () => {
           <li>
             <NavLink to="/assignments">Assignments</NavLink>
           </li>
-          <li>
-            <NavLink to="/pendingAssignments">Pending Assignments</NavLink>
-          </li>
+          {user && (
+            <li>
+              <NavLink to="/pendingAssignments">Pending Assignments</NavLink>
+            </li>
+          )}
         </ul>
       </div>
 
       <div className="navbar-end">
         {!user && (
-          <NavLink>
+          <NavLink to="/login">
             <button className="btn btn-ghost">Login</button>
           </NavLink>
         )}
@@ -95,14 +99,18 @@ const Navbar = () => {
                   tabIndex={0}
                   className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                 >
-                  <li>
-                    <Link to="/createAssignments">Create Assignments</Link>
-                  </li>
-                  <li>
-                    <Link to="/attemptAssignments">
-                      My Attempted Assignments
-                    </Link>
-                  </li>
+                  {user && (
+                    <li>
+                      <Link to="/createAssignments">Create Assignments</Link>
+                    </li>
+                  )}
+                  {user && (
+                    <li>
+                      <Link to="/attemptAssignments">
+                        My Attempted Assignments
+                      </Link>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>

@@ -7,11 +7,13 @@ import Assignments from "../pages/Assignments/Assignments";
 import PendingAssignments from "../pages/PendingAssignments/PendingAssignments";
 import CreateAssignments from "../pages/CreateAssignments/CreateAssignments";
 import MyAttemptedAssignments from "../pages/MyAttemptedAssignments/MyAttemptedAssignments";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage/>,
     children: [
         {
             path: "/",
