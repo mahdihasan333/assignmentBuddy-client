@@ -3,12 +3,20 @@ import google from "../../assets/image/Google.webp";
 
 
 const Login = () => {
+
+
+
+  // email and password validation
+  const handleSignIn = e => {
+    e.preventDefault();
+    const form = e.target;
+  }
     return (
         <div className="bg-base-200">
       <div className="hero-content flex-col">
         <h1 className="text-5xl font-bold">Login now!</h1>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form  className="card-body">
+          <form onSubmit={handleSignIn} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>

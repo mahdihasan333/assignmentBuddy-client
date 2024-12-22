@@ -1,7 +1,11 @@
 import React from "react";
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Navbar = () => {
+  const {user} = useContext(AuthContext);
+  console.log(user.name)
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -30,7 +34,7 @@ const Navbar = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/assignments">Assignments</NavLink>
+              <NavLink to="/assignments">Assignments </NavLink>
             </li>
             <li>
               <NavLink to="/pendingAssignments">Pending Assignments</NavLink>

@@ -1,8 +1,26 @@
 import Lottie from "react-lottie";
 import registerLottieData from "../../assets/lottie/Register.json";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Register = () => {
+  // const {userName} = useContext(AuthContext);
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+
+
+    const form = e.target;
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const photo = form.photo.value;
+    const password = form.password.value;
+    console.log(name, email, photo, password);
+  }
+
+
   return (
     // <div className="hero bg-base-200 min-h-screen">
     //   <div className="hero-content flex-col lg:flex-row-reverse">
@@ -52,7 +70,7 @@ const Register = () => {
       <div className="hero-content flex-col">
         <h1 className="text-5xl font-bold">Register now!</h1>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form  className="card-body">
+          <form onSubmit={handleSignUp} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -77,6 +95,7 @@ const Register = () => {
                 required
               />
             </div>
+            console.log(name)
             <div className="form-control">
               <label className="label">
                 <span className="label-text">PhotoURL</span>
