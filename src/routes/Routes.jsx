@@ -8,42 +8,55 @@ import PendingAssignments from "../pages/PendingAssignments/PendingAssignments";
 import CreateAssignments from "../pages/CreateAssignments/CreateAssignments";
 import MyAttemptedAssignments from "../pages/MyAttemptedAssignments/MyAttemptedAssignments";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
-    errorElement: <ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
-        {
-            path: "/",
-            element: <Home />,
-        },
-        {
-            path: "assignments",
-            element: <Assignments/>
-        },
-        {
-            path: 'pendingAssignments',
-            element: <PendingAssignments/>
-        },
-        {
-            path: 'createAssignments',
-            element: <CreateAssignments/>
-        },
-        {
-            path: '/attemptAssignments',
-            element: <MyAttemptedAssignments/>
-        },
-        {
-            path: '/login',
-            element: <Login/>
-        },
-        {
-            path: '/register',
-            element: <Register/>
-        }
-    ]
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "assignments",
+        element: <Assignments />,
+      },
+      {
+        path: "pendingAssignments",
+        element: (
+          <PrivateRoute>
+            <PendingAssignments />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "createAssignments",
+        element: (
+          <PrivateRoute>
+            <CreateAssignments />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/attemptAssignments",
+        element: (
+          <PrivateRoute>
+            <MyAttemptedAssignments />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+    ],
   },
 ]);
 
