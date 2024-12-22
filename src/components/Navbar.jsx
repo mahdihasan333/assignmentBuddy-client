@@ -56,67 +56,58 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <div className="navbar-end">
-        <div className="navbar-end">
-          {user && (
-            <div
-              data-tooltip-id="my-tooltip"
-              className="h-10 w-10 rounded-full"
-            >
-              <img
-                className="rounded-full"
-                src={user?.photoURL}
-                alt="User Avatar"
-              />
-              <Tooltip id="my-tooltip">
-                <div className="dark:text-white">{user?.displayName}</div>
-              </Tooltip>
-            </div>
-          )}
-          {user && user?.email ? (
-            <button
-              onClick={logoutUser}
-              className="btn btn-ghost dark:text-white"
-            >
-              Logout
-            </button>
-          ) : (
-            <NavLink
-              to="/login"
-              className="btn dark:bg-gray-800 dark:text-white"
-            >
-              Login
-            </NavLink>
-          )}
-        </div>
 
-        {/* image dropdown */}
-        <div className="dropdown dropdown-end z-50">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div title={"displayName"} className="w-10 rounded-full">
-              {/* <img
-                referrerPolicy="no-referrer"
-                alt="User Profile Photo"
-                src={photoURL}
-              /> */}
+      <div className="navbar-end">
+        {!user && (
+          <NavLink>
+            <button className="btn btn-ghost">Login</button>
+          </NavLink>
+        )}
+
+        {user && (
+          <>
+            <div className="flex justify-center items-center gap-2">
+              <button onClick={logoutUser} className="btn">
+                Logout
+              </button>
+              {/* image dropdown */}
+              <div className="dropdown dropdown-end z-50">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div
+                    data-tooltip-id="my-tooltip"
+                    className="w-10 rounded-full"
+                  >
+                    <img
+                      referrerPolicy="no-referrer"
+                      alt="User Profile Photo"
+                      src={user?.photoURL}
+                    />
+                    <Tooltip id="my-tooltip">
+                      <div className="dark:text-white">{user?.displayName}</div>
+                    </Tooltip>
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <Link to="/createAssignments">Create Assignments</Link>
+                  </li>
+                  <li>
+                    <Link to="/attemptAssignments">
+                      My Attempted Assignments
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <Link to="/createAssignments">Create Assignments</Link>
-            </li>
-            <li>
-              <Link to="/attemptAssignments">My Attempted Assignments</Link>
-            </li>
-          </ul>
-        </div>
+          </>
+        )}
       </div>
     </div>
   );
