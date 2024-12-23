@@ -23,7 +23,9 @@ const AssignmentCard = ({ assignment, handleDelete }) => {
         <p>{description}</p>
 
         <div className="card-actions">
-          <button className="btn btn-primary">View Assignment</button>
+          <Link to={`/assignment/${_id}`}>
+            <button className="btn btn-primary">View Assignment</button>
+          </Link>
           <Link to={`/update/${_id}`}>
             <button className="btn btn-primary">Update</button>
           </Link>
