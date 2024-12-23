@@ -77,10 +77,6 @@ const MyAttemptedAssignments = () => {
                     >
                       Feedback
                     </th>
-
-                    <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
-                      Edit
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200 ">
@@ -112,7 +108,6 @@ const MyAttemptedAssignments = () => {
                           </p>
                         </div>
                       </td>
-                      
 
                       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
                         {assignment.marks}

@@ -1,8 +1,12 @@
-import {format} from 'date-fns'
+import { format } from "date-fns";
+import { Link } from "react-router-dom";
 
+const AssignmentCard = ({ assignment, handleDelete }) => {
+  // details of the assignment
 
-const AssignmentCard = ({ assignment }) => {
-  const { title, deadline, difficulty, imageUrl, marks, description } =
+  // update the assignment
+
+  const { _id, title, deadline, difficulty, imageUrl, marks, description } =
     assignment || {};
   return (
     <div className="card bg-base-100 shadow-xl">
@@ -11,7 +15,7 @@ const AssignmentCard = ({ assignment }) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
-        <p>Deadline: {format(new Date(deadline), 'P')}</p>
+        <p>Deadline: {format(new Date(deadline), "P")}</p>
         <div className="flex items-center gap-10">
           <p>{marks}</p>
           <p>{difficulty}</p>
@@ -20,8 +24,12 @@ const AssignmentCard = ({ assignment }) => {
 
         <div className="card-actions">
           <button className="btn btn-primary">View Assignment</button>
-          <button className="btn btn-primary">Update</button>
-          <button className="btn btn-primary">Delete</button>
+          <Link to={`/`}>
+            <button className="btn btn-primary">Update</button>
+          </Link>
+          <button onClick={() => handleDelete(_id)} className="btn btn-primary">
+            Delete
+          </button>
         </div>
       </div>
     </div>
