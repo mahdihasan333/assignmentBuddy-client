@@ -1,4 +1,5 @@
-import React from "react";
+import {format} from 'date-fns'
+
 
 const AssignmentCard = ({ assignment }) => {
   const { title, deadline, difficulty, imageUrl, marks, description } =
@@ -10,6 +11,7 @@ const AssignmentCard = ({ assignment }) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
+        <p>Deadline: {format(new Date(deadline), 'P')}</p>
         <div className="flex items-center gap-10">
           <p>{marks}</p>
           <p>{difficulty}</p>

@@ -56,7 +56,7 @@ const CreateAssignments = () => {
         confirmButtonText: "Ok",
       });
 
-      navigate("/pendingAssignments");
+      navigate("/attemptAssignments");
     } catch (error) {
       console.log(error);
       Swal.fire({
