@@ -1,16 +1,16 @@
 import axios from "axios";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const AssignmentDetails = () => {
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [assignment, setAssignment] = useState({});
   const [startDate, setStartDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [submissionLink, setSubmissionLink] = useState("");
-  const [quickNote, setQuickNote] = useState("");
 
   useEffect(() => {
     fetchAssignmentData();
@@ -24,8 +24,37 @@ const AssignmentDetails = () => {
     setStartDate(new Date(data.deadline));
   };
 
+  const {
+    _id,
+    title,
+    deadline,
+    difficulty,
+    imageUrl,
+    marks,
+    description,
+    student,
+  } = assignment || {};
+  console.log(student);
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    const form = e.target;
+    const docs = form.docs.value;
+    const note = form.note.value;
+    console.log(docs, note);
+
+    // check user validation
+    if (user?.email === student?.email)
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: 'Action not Permitted',
+      });
+
+    const userAssignmentData = { docs, note };
+    console.log('user',userAssignmentData)
+
     // try {
     //   const payload = {
     //     assignmentId: id,
@@ -53,9 +82,6 @@ const AssignmentDetails = () => {
     //   });
     // }
   };
-
-  const { _id, title, deadline, difficulty, imageUrl, marks, description } =
-    assignment || {};
 
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl">
@@ -96,8 +122,7 @@ const AssignmentDetails = () => {
                   type="url"
                   placeholder="Enter Google Docs link"
                   className="input input-bordered"
-                  value={submissionLink}
-                  onChange={(e) => setSubmissionLink(e.target.value)}
+                  name="docs"
                   required
                 />
               </div>
@@ -108,8 +133,8 @@ const AssignmentDetails = () => {
                 <textarea
                   placeholder="Enter a quick note"
                   className="textarea textarea-bordered"
-                  value={quickNote}
-                  onChange={(e) => setQuickNote(e.target.value)}
+                  name="note"
+                  required
                 ></textarea>
               </div>
               <div className="modal-action">
