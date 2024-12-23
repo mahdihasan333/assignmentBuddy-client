@@ -11,6 +11,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 import AssignmentDetails from "../pages/AssignmentDetails/AssignmentDetails";
 import UpdateAssignment from "../pages/UpdateAssignment/UpdateAssignment";
+import AssignmentForm from "../pages/AssignmentForm/AssignmentForm";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
             <MyAttemptedAssignments />
           </PrivateRoute>
         ),
+      },
+      {
+        path: '/assignmentForm',
+        element: <AssignmentForm/>
       },
       {
         path: "/login",
