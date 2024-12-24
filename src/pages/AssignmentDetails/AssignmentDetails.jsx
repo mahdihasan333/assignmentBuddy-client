@@ -43,7 +43,7 @@ const AssignmentDetails = () => {
     const form = e.target;
     const docs = form.docs.value;
     const note = form.note.value;
-    const userName = user?.name;
+    const userName = user?.displayName;
     const userTitle = title;
     const userMarks = marks;
     const userId = _id;
@@ -56,7 +56,7 @@ const AssignmentDetails = () => {
         text: "Action not Permitted",
       });
 
-    const userAssignmentData = { userName, docs, userTitle, note, userId, userMarks, status: 'Pending' };
+    const userAssignmentData = { docs, userTitle, note, userId, userMarks, status: 'Pending', userName };
 
     try {
       // server site post request

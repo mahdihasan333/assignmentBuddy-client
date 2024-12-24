@@ -1,16 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
-import PendingTable from "../../components/PendingTable";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const PendingAssignments = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
   const [assignments, setAssignments] = useState([]);
-  const [selectedAssignment, setSelectedAssignment] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [marks, setMarks] = useState("");
-  const [feedback, setFeedback] = useState("");
 
   useEffect(() => {
     fetchAssignments();
@@ -21,28 +20,71 @@ const PendingAssignments = () => {
       `${import.meta.env.VITE_API_URL}/user-assignment`
     );
     setAssignments(data);
+    console.log(data);
   };
-  console.log(assignments);
 
-  const handleOpenModal = (assignment) => {
-    setSelectedAssignment(assignment);
+  const handleOpenModal = () => {
     setModalVisible(true);
   };
 
   const handleCloseModal = () => {
-    setSelectedAssignment(null);
     setModalVisible(false);
-    setMarks("");
-    setFeedback("");
   };
 
-  const handleSubmitMarking = async () => {
-    if (!marks || !feedback) {
-      alert("Please provide both marks and feedback.");
-      return;
-    }
+  const handleSubmitMarking = async (e) => {
+    e.preventDefault();
 
-    //
+    const form = e.target;
+
+    const submitMark = form.marks.value;
+    const feedback = form.feedback.value;
+    const userTitle = assignments[0]?.userTitle;
+    const userMarks = assignments[0]?.userMarks;
+    const userStatus = assignments[0]?.status;
+
+    if (submitMark > assignments[0]?.userMarks)
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `Action forbidden`,
+      });
+
+    const markedAssignment = {
+      submitMark,
+      feedback,
+      userTitle,
+      userMarks,
+      userStatus,
+    };
+
+    try {
+      // server site post request
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/marked-assignment`,
+        markedAssignment
+      );
+
+      // reset form
+      form.reset();
+
+      // show sweet alert and navigate to assignments page
+      Swal.fire({
+        title: "Success!",
+        text: "User Assignment Added successfully",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+      console.log(data);
+
+      navigate("/assignments");
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error.message}`,
+      });
+    }
   };
 
   return (
@@ -82,10 +124,28 @@ const PendingAssignments = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {assignments.map((assignment) => (
-                    <PendingTable
-                      key={assignment._id}
-                      assignment={assignment}
-                    />
+                    <tr key={assignment._id}>
+                      <td className="px-4 py-4 text-sm text-gray-500">
+                        {assignment.userTitle}
+                      </td>
+                      <td className="px-4 py-4 text-sm text-gray-500">
+                        {assignment?.userMarks}
+                      </td>
+                      <td className="px-4 py-4 text-sm text-gray-500">
+                        {assignment?.userName}
+                      </td>
+                      <td className="px-4 py-4 text-sm text-gray-500">
+                        <span>{assignment?.status}</span>
+                      </td>
+                      <td className="px-4 py-4 text-sm text-gray-500">
+                        <button
+                          className="text-blue-600 underline"
+                          onClick={() => handleOpenModal(assignment)}
+                        >
+                          Give Mark
+                        </button>
+                      </td>
+                    </tr>
                   ))}
                 </tbody>
               </table>
@@ -97,60 +157,81 @@ const PendingAssignments = () => {
       {/* Modal */}
       {modalVisible && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg w-96">
+          <form
+            className="bg-white p-6 rounded-lg w-96"
+            onSubmit={handleSubmitMarking}
+          >
             <h3 className="text-lg font-medium text-gray-800">
               Mark Assignment
             </h3>
             <p className="mt-2 text-sm text-gray-600">
-              <strong>Title:</strong> {selectedAssignment?.title}
+              <strong>Title:</strong> {assignments[0]?.userTitle}
             </p>
             <p className="mt-2 text-sm text-gray-600">
-              <strong>Notes:</strong> {selectedAssignment?.notes}
+              <strong>Notes:</strong> {assignments[0]?.note}
+            </p>
+            <p className="mt-2 text-sm text-gray-600">
+              <strong>Marks:</strong> {assignments[0]?.userMarks}
             </p>
             <a
-              href={selectedAssignment?.googleDocsLink}
+              href={assignments[0]?.docs}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 underline mt-2 block"
             >
               View Google Docs
             </a>
+
+            {/* Marks input */}
             <div className="mt-4">
-              <label className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="marks"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Marks
               </label>
               <input
+                id="marks"
+                name="marks"
                 type="number"
                 className="w-full px-3 py-2 border rounded-md"
-                value={marks}
-                onChange={(e) => setMarks(e.target.value)}
+                required
               />
             </div>
+
+            {/* Feedback input */}
             <div className="mt-4">
-              <label className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="feedback"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Feedback
               </label>
               <textarea
+                id="feedback"
+                name="feedback"
                 className="w-full px-3 py-2 border rounded-md"
-                value={feedback}
-                onChange={(e) => setFeedback(e.target.value)}
+                required
               ></textarea>
             </div>
+
+            {/* Buttons */}
             <div className="mt-6 flex justify-end gap-3">
               <button
+                type="button"
                 className="px-4 py-2 text-sm text-gray-600 bg-gray-200 rounded-md"
                 onClick={handleCloseModal}
               >
                 Cancel
               </button>
               <button
+                type="submit"
                 className="px-4 py-2 text-sm text-white bg-blue-600 rounded-md"
-                onClick={handleSubmitMarking}
               >
                 Submit
               </button>
             </div>
-          </div>
+          </form>
         </div>
       )}
     </div>
