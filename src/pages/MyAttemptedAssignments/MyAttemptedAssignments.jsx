@@ -14,9 +14,10 @@ const MyAttemptedAssignments = () => {
 
   const fetchAssignments = async () => {
     const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}/assignments/${user?.email}`
+      `${import.meta.env.VITE_API_URL}/marked-assignments/${user?.email}`
     );
     setAssignments(data);
+    console.log(data);
   };
 
   console.log(assignments);
@@ -84,36 +85,37 @@ const MyAttemptedAssignments = () => {
                   {assignments.map((assignment) => (
                     <tr key={assignment._id}>
                       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                        {assignment.title}
+                        {assignment.userTitle}
                       </td>
 
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
                         <div className="flex items-center gap-x-2">
                           <p
                             className={`px-3 py-1  ${
-                              assignment.difficulty === "easy" &&
-                              "text-blue-500 bg-blue-100/60"
+                              assignment.userStatus === "Pending" &&
+                              "text-yellow-500 bg-blue-100/60"
                             } 
                             ${
-                              assignment.difficulty === "medium" &&
+                              assignment.userStatus === "Completed" &&
                               "text-green-500 bg-green-100/60"
                             }
-                            ${
-                              assignment.difficulty === "hard" &&
-                              "text-red-500 bg-red-100/60"
-                            }
+                            
                             text-xs  rounded-full`}
                           >
-                            {assignment.difficulty}
+                            {assignment.userStatus}
                           </p>
                         </div>
                       </td>
 
                       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                        {assignment.marks}
+                        {assignment.userMarks}
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                        {assignment.marks}
+                        {assignment.submitMark}
+                      </td>
+                      <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
+                        {assignment?.feedback.substring(0, 5)}...
+                        {/* {job?.description.substring(0, 18)}... */}
                       </td>
                     </tr>
                   ))}

@@ -17,22 +17,13 @@ const Assignments = () => {
       `${import.meta.env.VITE_API_URL}/assignments`
     );
     setAssignments(data);
+    fetchAssignments();
   };
-
 
   // delete the assignment
   const handleDelete = async (id) => {
     try {
-      const { data } = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/assignment/${id}`
-      );
-
-      if (user?.email !== assignments[0]?.student?.email)
-        return Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: `Action forbidden`,
-        });
+      await axios.delete(`${import.meta.env.VITE_API_URL}/assignment/${id}`);
 
       Swal.fire({
         title: "Success!",
@@ -52,9 +43,15 @@ const Assignments = () => {
   };
 
   return (
-    <div>
-      <div>.....................</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="my-16">
+      <div className="text-center space-y-4">
+        <h2 className="text-2xl font-bold">Learn & Grade Together</h2>
+        <p className="mt-4 text-lg">
+          Bringing friends together to create, manage, and evaluate assignments
+          while fostering a community of learning.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
         {assignments.map((assignment) => (
           <AssignmentCard
             key={assignment._id}

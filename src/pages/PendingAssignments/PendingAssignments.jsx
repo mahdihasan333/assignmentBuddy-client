@@ -35,19 +35,37 @@ const PendingAssignments = () => {
     e.preventDefault();
 
     const form = e.target;
-
-    const submitMark = form.marks.value;
+    const submitMark = form.submit_marks.value;
+    console.log(submitMark);
     const feedback = form.feedback.value;
     const userTitle = assignments[0]?.userTitle;
     const userMarks = assignments[0]?.userMarks;
+    console.log(userMarks);
+    const userEmail = assignments[0]?.userEmail;
     const userStatus = assignments[0]?.status;
 
-    if (submitMark > assignments[0]?.userMarks)
+    // if (submitMark > userMarks)
+    //   return Swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: `Action forbidden!`,
+    //   });
+
+    if (user?.email === userEmail)
       return Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: `Action forbidden`,
+        text: "You cannot mark your own assignment.",
       });
+
+    // Check submitMark is greater than userMarks
+    // if (submitMark > userMarks) {
+    //   return Swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: "You cannot give more marks than the original marks.",
+    //   });
+    // }
 
     const markedAssignment = {
       submitMark,
@@ -55,6 +73,7 @@ const PendingAssignments = () => {
       userTitle,
       userMarks,
       userStatus,
+      userEmail,
     };
 
     try {
@@ -192,7 +211,7 @@ const PendingAssignments = () => {
               </label>
               <input
                 id="marks"
-                name="marks"
+                name="submit_marks"
                 type="number"
                 className="w-full px-3 py-2 border rounded-md"
                 required

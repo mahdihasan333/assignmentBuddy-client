@@ -35,7 +35,6 @@ const AssignmentDetails = () => {
     description,
     student,
   } = assignment || {};
-  console.log(student);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -44,11 +43,11 @@ const AssignmentDetails = () => {
     const docs = form.docs.value;
     const note = form.note.value;
     const userName = user?.displayName;
+    const userEmail = user?.email;
     const userTitle = title;
     const userMarks = marks;
     const userId = _id;
 
-    // check user validation
     if (user?.email === student?.email)
       return Swal.fire({
         icon: "error",
@@ -56,30 +55,32 @@ const AssignmentDetails = () => {
         text: "Action not Permitted",
       });
 
-    const userAssignmentData = { docs, userTitle, note, userId, userMarks, status: 'Pending', userName };
+    const userAssignmentData = {
+      docs,
+      userTitle,
+      note,
+      userId,
+      userMarks,
+      status: "Pending",
+      userName,
+      userEmail,
+    };
 
     try {
-      // server site post request
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/add-user`,
         userAssignmentData
       );
-
-      // reset form
       form.reset();
 
-      // show sweet alert and navigate to assignments page
       Swal.fire({
         title: "Success!",
         text: "User Assignment Added successfully",
         icon: "success",
         confirmButtonText: "Ok",
       });
-      console.log(data);
-
       navigate("/pendingAssignments");
     } catch (error) {
-      console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -89,18 +90,48 @@ const AssignmentDetails = () => {
   };
 
   return (
-    <div className="card lg:card-side bg-base-100 shadow-xl">
-      <figure>
-        <img src={imageUrl} alt="Album" />
+    <div className="card my-16 lg:card-side bg-base-100 shadow-xl transform transition-transform hover:scale-105">
+      <figure className="w-full lg:w-1/3 overflow-hidden">
+        <img
+          src={imageUrl}
+          alt="Assignment"
+          className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-110"
+        />
       </figure>
-      <div className="card-body">
-        <h2 className="card-title">{title}</h2>
-        {deadline && <p>Deadline: {format(new Date(deadline), "P")}</p>}
-        <p>{description}</p>
-        <div className="card-actions justify-end">
+      <div className="card-body p-6 lg:p-8">
+        <h2 className="card-title text-2xl font-bold text-gray-800">{title}</h2>
+        {deadline && (
+          <p className="text-gray-600 text-sm mt-2">
+            <span className="font-semibold">Deadline:</span>{" "}
+            {format(new Date(deadline), "P")}
+          </p>
+        )}
+        <p className="mt-4 text-gray-700">{description}</p>
+
+        <div className="mt-6">
+          <h3 className="text-sm font-semibold text-gray-700">
+            Buyer Details:
+          </h3>
+          <div className="flex items-center gap-4 mt-3">
+            <div>
+              <p className="text-sm text-gray-600">Name: {student?.name}</p>
+              <p className="text-sm text-gray-600">Email: {student?.email}</p>
+            </div>
+            <div className="rounded-full overflow-hidden w-14 h-14">
+              <img
+                referrerPolicy="no-referrer"
+                src={student?.photo}
+                alt="Student"
+                className="object-cover w-full h-full"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="card-actions justify-end mt-6">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="btn btn-primary"
+            className="btn btn-primary shadow-md hover:shadow-lg hover:bg-blue-700 transition-colors"
           >
             Take Assignment
           </button>

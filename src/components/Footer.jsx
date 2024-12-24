@@ -1,4 +1,5 @@
 import React from "react";
+import { FaGithub, FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -43,23 +44,57 @@ const Footer = () => {
         {/* Contact & Social Media */}
         <div className="w-full sm:w-1/3">
           <h4 className="text-lg font-semibold mb-2">Contact Us</h4>
-          <ul className="list-none space-y-2 text-sm">
+          <ul className="list-none space-y-2 text-sm flex flex-wrap items-center gap-3">
             <li>
               <a
-                href="https://github.com/mahdihasan333"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:underline"
+                className="hover:underline flex items-center space-x-2"
               >
-                GitHub
+                <FaGithub className="text-xl" />
+                <span>GitHub</span>
               </a>
             </li>
             <li>
               <a
-                href="mailto:mahdioffi333@gmail.com"
+                href="#" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline flex items-center space-x-2"
+              >
+                <FaTwitter className="text-xl" />
+                <span>Twitter</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline flex items-center space-x-2"
+              >
+                <FaInstagram className="text-xl" />
+                <span>Instagram</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline flex items-center space-x-2"
+              >
+                <FaFacebook className="text-xl" />
+                <span>Facebook</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
                 className="hover:underline"
               >
-                Email: mahdioffi333@gmail.com
+                Email: assignmentbuddy@gmail.com
               </a>
             </li>
           </ul>
