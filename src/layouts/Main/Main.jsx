@@ -5,11 +5,11 @@ import Footer from "../../components/Footer";
 
 const Main = () => {
   return (
-    <div className="w-11/12 mx-auto">
+    <div className="">
       {/* Navbar */}
       <Navbar />
       {/* outlet */}
-      <div className="min-h-[calc(100vh-306px)]">
+      <div className="w-11/12 mx-auto min-h-[calc(100vh-270px)]">
         <Outlet />
       </div>
       {/* footer */}

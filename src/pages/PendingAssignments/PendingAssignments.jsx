@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
+import PendingTable from "../../components/PendingTable";
 
 const PendingAssignments = () => {
   const { user } = useContext(AuthContext);
@@ -13,20 +14,15 @@ const PendingAssignments = () => {
 
   useEffect(() => {
     fetchAssignments();
-  }, [user]);
+  }, []);
 
   const fetchAssignments = async () => {
-    try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/assignments/${
-          user?.email
-        }?status=pending`
-      );
-      setAssignments(data);
-    } catch (error) {
-      console.error("Error fetching assignments:", error);
-    }
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_URL}/user-assignment`
+    );
+    setAssignments(data);
   };
+  console.log(assignments);
 
   const handleOpenModal = (assignment) => {
     setSelectedAssignment(assignment);
@@ -46,21 +42,7 @@ const PendingAssignments = () => {
       return;
     }
 
-    try {
-      await axios.put(
-        `${import.meta.env.VITE_API_URL}/assignments/${selectedAssignment._id}`,
-        {
-          marks,
-          feedback,
-          status: "completed",
-        }
-      );
-      alert("Assignment marked successfully!");
-      fetchAssignments(); // Refresh assignments
-      handleCloseModal(); // Close modal
-    } catch (error) {
-      console.error("Error submitting marks:", error);
-    }
+    //
   };
 
   return (
@@ -70,7 +52,7 @@ const PendingAssignments = () => {
           My Pending Assignments
         </h2>
         <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full">
-          {assignments.length} assignment(s)
+          {assignments.length} assignments
         </span>
       </div>
 
@@ -100,28 +82,10 @@ const PendingAssignments = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {assignments.map((assignment) => (
-                    <tr key={assignment._id}>
-                      <td className="px-4 py-4 text-sm text-gray-500">
-                        {assignment.title}
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-500">
-                        {assignment.difficulty}
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-500">
-                        {assignment.examineeName}
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-500">
-                        {assignment.examineeName}
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-500">
-                        <button
-                          className="text-blue-600 underline"
-                          onClick={() => handleOpenModal(assignment)}
-                        >
-                          Give Mark
-                        </button>
-                      </td>
-                    </tr>
+                    <PendingTable
+                      key={assignment._id}
+                      assignment={assignment}
+                    />
                   ))}
                 </tbody>
               </table>

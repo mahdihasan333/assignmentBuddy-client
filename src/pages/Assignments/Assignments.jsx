@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AssignmentCard from "../../components/AssignmentCard";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Assignments = () => {
+  const { user } = useContext(AuthContext);
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
@@ -17,7 +19,6 @@ const Assignments = () => {
     setAssignments(data);
   };
 
-  console.log(assignments);
 
   // delete the assignment
   const handleDelete = async (id) => {
@@ -25,6 +26,14 @@ const Assignments = () => {
       const { data } = await axios.delete(
         `${import.meta.env.VITE_API_URL}/assignment/${id}`
       );
+
+      if (user?.email !== assignments[0]?.student?.email)
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `Action forbidden`,
+        });
+
       Swal.fire({
         title: "Success!",
         text: "Assignment Deleted successfully",

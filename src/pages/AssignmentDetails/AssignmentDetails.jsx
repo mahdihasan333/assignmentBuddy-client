@@ -1,11 +1,12 @@
 import axios from "axios";
 import { format } from "date-fns";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const AssignmentDetails = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [assignment, setAssignment] = useState({});
@@ -42,45 +43,49 @@ const AssignmentDetails = () => {
     const form = e.target;
     const docs = form.docs.value;
     const note = form.note.value;
-    console.log(docs, note);
+    const userName = user?.name;
+    const userTitle = title;
+    const userMarks = marks;
+    const userId = _id;
 
     // check user validation
     if (user?.email === student?.email)
       return Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: 'Action not Permitted',
+        text: "Action not Permitted",
       });
 
-    const userAssignmentData = { docs, note };
-    console.log('user',userAssignmentData)
+    const userAssignmentData = { userName, docs, userTitle, note, userId, userMarks, status: 'Pending' };
 
-    // try {
-    //   const payload = {
-    //     assignmentId: id,
-    //     submissionLink,
-    //     quickNote,
-    //   };
-    //   await axios.post(
-    //     `${import.meta.env.VITE_API_URL}/submit-assignment`,
-    //     payload
-    //   );
-    //   Swal.fire({
-    //     title: "Success!",
-    //     text: "Assignment Deleted successfully",
-    //     icon: "success",
-    //     confirmButtonText: "Ok",
-    //   });
-    //   setIsModalOpen(false);
-    //   setSubmissionLink("");
-    //   setQuickNote("");
-    // } catch (error) {
-    //   Swal.fire({
-    //     icon: "error",
-    //     title: "Oops...",
-    //     text: `${error.message}`,
-    //   });
-    // }
+    try {
+      // server site post request
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/add-user`,
+        userAssignmentData
+      );
+
+      // reset form
+      form.reset();
+
+      // show sweet alert and navigate to assignments page
+      Swal.fire({
+        title: "Success!",
+        text: "User Assignment Added successfully",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+      console.log(data);
+
+      navigate("/pendingAssignments");
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error.message}`,
+      });
+    }
   };
 
   return (

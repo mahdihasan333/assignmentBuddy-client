@@ -40,7 +40,7 @@ const CreateAssignments = () => {
 
     try {
       // server site post request
-      const { data } = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_API_URL}/add-assignment`,
         formData
       );
@@ -65,8 +65,6 @@ const CreateAssignments = () => {
         text: `${error.message}`,
       });
     }
-
-    console.log(data);
   };
 
   return (
