@@ -3,38 +3,60 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { Tooltip } from "react-tooltip";
+import { ThemeContext } from "../providers/ThemeProvider";
 
 const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
+  const { toggleTheme } = useContext(ThemeContext);
   return (
-    <div className="navbar bg-base-100 w-11/12 mx-auto">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <section className="w-full">
+      <div className="navbar dark:bg-gray-800 dark:text-white bg-base-100 lg:px-12">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/assignments">Assignments </NavLink>
+              </li>
+              {user && (
+                <li>
+                  <NavLink to="/pendingAssignments">
+                    Pending Assignments
+                  </NavLink>
+                </li>
+              )}
+            </ul>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
+          <a className="btn btn-ghost text-xl">AssignmentBuddy</a>
+        </div>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/assignments">Assignments </NavLink>
+              <NavLink to="/assignments">Assignments</NavLink>
             </li>
             {user && (
               <li>
@@ -43,81 +65,71 @@ const Navbar = () => {
             )}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">AssignmentBuddy</a>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/assignments">Assignments</NavLink>
-          </li>
-          {user && (
-            <li>
-              <NavLink to="/pendingAssignments">Pending Assignments</NavLink>
-            </li>
+
+        <div className="navbar-end">
+          {!user && (
+            <NavLink to="/login">
+              <button className="btn btn-ghost">Login</button>
+            </NavLink>
           )}
-        </ul>
-      </div>
 
-      <div className="navbar-end">
-        {!user && (
-          <NavLink to="/login">
-            <button className="btn btn-ghost">Login</button>
-          </NavLink>
-        )}
-
-        {user && (
-          <>
-            <div className="flex justify-center items-center gap-2">
-              <button onClick={logoutUser} className="btn">
-                Logout
-              </button>
-              {/* image dropdown */}
-              <div className="dropdown dropdown-end z-50">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle avatar"
-                >
+          {user && (
+            <>
+              <div className="flex justify-center items-center gap-2">
+                <button onClick={logoutUser} className="btn">
+                  Logout
+                </button>
+                {/* image dropdown */}
+                <div className="dropdown dropdown-end z-50">
                   <div
-                    data-tooltip-id="my-tooltip"
-                    className="w-10 rounded-full"
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost btn-circle avatar"
                   >
-                    <img
-                      referrerPolicy="no-referrer"
-                      alt="User Profile Photo"
-                      src={user?.photoURL}
-                    />
-                    <Tooltip id="my-tooltip">
-                      <div className="dark:text-white">{user?.displayName}</div>
-                    </Tooltip>
+                    <div
+                      data-tooltip-id="my-tooltip"
+                      className="w-10 rounded-full"
+                    >
+                      <img
+                        referrerPolicy="no-referrer"
+                        alt="User Profile Photo"
+                        src={user?.photoURL}
+                      />
+                      <Tooltip id="my-tooltip">
+                        <div className="dark:text-white">
+                          {user?.displayName}
+                        </div>
+                      </Tooltip>
+                    </div>
                   </div>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                    {user && (
+                      <li>
+                        <Link to="/createAssignments">Create Assignments</Link>
+                      </li>
+                    )}
+                    {user && (
+                      <li>
+                        <Link to="/attemptAssignments">
+                          My Attempted Assignments
+                        </Link>
+                      </li>
+                    )}
+                  </ul>
                 </div>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-                >
-                  {user && (
-                    <li>
-                      <Link to="/createAssignments">Create Assignments</Link>
-                    </li>
-                  )}
-                  {user && (
-                    <li>
-                      <Link to="/attemptAssignments">
-                        My Attempted Assignments
-                      </Link>
-                    </li>
-                  )}
-                </ul>
               </div>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
+        <button onClick={toggleTheme} className="btn">
+          {/* <input type="checkbox" className="toggle" defaultChecked /> */}
+          <input type="checkbox" className="toggle" defaultChecked />
+        </button>
       </div>
-    </div>
+    </section>
   );
 };
 
