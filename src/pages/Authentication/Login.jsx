@@ -28,7 +28,6 @@ const Login = () => {
           confirmButtonText: "Ok",
         });
         navigate(location?.state ? location.state : "/");
-        console.log(user);
       })
       .catch((error) => {
         Swal.fire({
@@ -53,7 +52,6 @@ const Login = () => {
           confirmButtonText: "Ok",
         });
         navigate(location?.state ? location.state : "/");
-        console.log(user);
       })
       .catch((error) => {
         Swal.fire({

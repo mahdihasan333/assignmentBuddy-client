@@ -49,13 +49,14 @@ const Register = () => {
           icon: "success",
           confirmButtonText: "Ok",
         });
-        console.log(user);
       })
       .catch((error) => {
-        console.log(error.message);
+        Swal.fire({
+          icon: "error",
+          title: "Oops",
+          text: `${error.message}`,
+        });
       });
-
-    console.log(name, email, photo, password);
   };
 
   return (

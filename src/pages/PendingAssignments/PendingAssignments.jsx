@@ -40,16 +40,12 @@ const PendingAssignments = () => {
   const email = assignments[0]?.userEmail;
   const examinerEmail = user?.email;
   const assignmentCreator = assignments[0]?.assignmentCreator;
-  console.log(assignmentCreator)
-
-  
 
   const handleSubmitMarking = async (e) => {
     e.preventDefault();
 
     const form = e.target;
     const submitMark = form.submit_marks.value;
-    console.log(typeof submitMark, submitMark);
     const feedback = form.feedback.value;
 
     const markedUser = assignments?.userMarks;
@@ -78,12 +74,8 @@ const PendingAssignments = () => {
       SubmitStatus: "Completed",
       email,
       examinerEmail,
-      assignmentCreator
+      assignmentCreator,
     };
-
-
-
-    
 
     try {
       const { data } = await axios.post(
@@ -102,7 +94,6 @@ const PendingAssignments = () => {
 
       navigate("/assignments");
     } catch (error) {
-      console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -111,7 +102,6 @@ const PendingAssignments = () => {
     }
   };
   const titleUser = assignments[0]?.userTitle;
-  console.log(assignments[0]?.userTitle, "user", titleUser);
 
   return (
     <div className="px-4 mx-auto py-16 dark:bg-gray-900 dark:text-white">
@@ -119,13 +109,10 @@ const PendingAssignments = () => {
         <h2 className="text-lg font-medium text-gray-800 dark:text-white">
           My Pending Assignments
         </h2>
-        <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 dark:bg-gray-700 dark:text-white rounded-full">
-          {assignments.length} assignments
-        </span>
       </div>
 
       <div className="flex flex-col mt-6">
-        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -149,30 +136,32 @@ const PendingAssignments = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800">
-                  {assignments.filter(assign => assign._id !== assignments[0]._id).map((assignment) => (
-                    <tr key={assignment._id}>
-                      <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
-                        {assignment.userTitle}
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
-                        {assignment?.userMarks}
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
-                        {assignment?.userName}
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
-                        <span>{assignment?.status}</span>
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
-                        <button
-                          className="text-blue-600 underline dark:text-blue-400"
-                          onClick={() => handleOpenModal(assignment)}
-                        >
-                          Give Mark
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {assignments
+                    .filter((assign) => assign._id !== assignments[0]._id)
+                    .map((assignment) => (
+                      <tr key={assignment._id}>
+                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
+                          {assignment.userTitle}
+                        </td>
+                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
+                          {assignment?.userMarks}
+                        </td>
+                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
+                          {assignment?.userName}
+                        </td>
+                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
+                          <span>{assignment?.status}</span>
+                        </td>
+                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
+                          <button
+                            className="text-blue-600 underline dark:text-blue-400"
+                            onClick={() => handleOpenModal(assignment)}
+                          >
+                            Give Mark
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>

@@ -17,7 +17,6 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  console.log(user);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
 
@@ -57,7 +56,6 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      console.log("Current User-->", currentUser);
       if (currentUser?.email) {
         setUser(currentUser);
         const { data } = await axios.post(
@@ -67,7 +65,6 @@ const AuthProvider = ({ children }) => {
           },
           { withCredentials: true }
         );
-        console.log(data);
       } else {
         setUser(currentUser);
         const { data } = await axios.get(

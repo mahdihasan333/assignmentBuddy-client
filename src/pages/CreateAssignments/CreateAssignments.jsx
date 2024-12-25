@@ -58,7 +58,6 @@ const CreateAssignments = () => {
 
       navigate("/assignments");
     } catch (error) {
-      console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
