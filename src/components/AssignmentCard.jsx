@@ -1,5 +1,4 @@
 import Swal from "sweetalert2";
-import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
@@ -36,8 +35,7 @@ const AssignmentCard = ({ assignment, handleDelete }) => {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        handleDelete(id); // Call the delete handler if confirmed
-        Swal.fire("Deleted!", "The assignment has been deleted.", "success");
+        handleDelete(id);
       }
     });
   };
@@ -66,11 +64,8 @@ const AssignmentCard = ({ assignment, handleDelete }) => {
             {difficulty}
           </p>
         </div>
-        <p className="mt-3 text-gray-600 dark:text-white line-clamp-3">
-          {description.substring(0, 20)}...
-        </p>
 
-        <div className="card-actions mt-4 flex gap-3">
+        <div className="card-actions mt-4 flex flex-wrap gap-3">
           <Link to={`/assignment/${_id}`}>
             <button className="btn btn-primary hover:bg-blue-700 dark:hover:bg-blue-800 transition-all">
               View Assignment

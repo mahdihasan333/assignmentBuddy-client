@@ -68,7 +68,7 @@ const UpdateAssignment = () => {
         confirmButtonText: "Ok",
       });
 
-      navigate("/attemptAssignments");
+      navigate("/assignments");
     } catch (error) {
       Swal.fire({
         icon: "error",

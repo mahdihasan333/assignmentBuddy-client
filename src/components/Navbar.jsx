@@ -7,7 +7,7 @@ import { ThemeContext } from "../providers/ThemeProvider";
 const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
   const { toggleTheme, isDarkMode } = useContext(ThemeContext); // Assuming `isDarkMode` is provided by ThemeContext
-  
+
   return (
     <section className="w-full">
       <div className="navbar dark:bg-gray-800 dark:text-white bg-base-100 lg:px-12">
@@ -41,7 +41,9 @@ const Navbar = () => {
               </li>
               {user && (
                 <li>
-                  <NavLink to="/pendingAssignments">Pending Assignments</NavLink>
+                  <NavLink to="/pendingAssignments">
+                    Pending Assignments
+                  </NavLink>
                 </li>
               )}
             </ul>
@@ -88,7 +90,7 @@ const Navbar = () => {
                       data-tooltip-id="my-tooltip"
                       className="w-10 bg-none rounded-full"
                     >
-                      <img 
+                      <img
                         referrerPolicy="no-referrer"
                         alt="User Profile Photo"
                         src={user?.photoURL}
