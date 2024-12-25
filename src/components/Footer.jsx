@@ -3,11 +3,11 @@ import { FaGithub, FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-base-300 text-base-content py-8">
-      <div className="container mx-auto flex flex-wrap justify-between items-center px-4">
+    <footer className="bg-base-300 text-base-content dark:bg-black dark:text-gray-100 py-8">
+      <div className="container mx-auto flex flex-wrap justify-between items-start px-4 space-y-6 sm:space-y-0">
         {/* About Section */}
-        <div className="w-full sm:w-1/3 mb-4 sm:mb-0">
-          <h3 className="text-lg font-semibold">Group Study Hub</h3>
+        <div className="w-full sm:w-1/3">
+          <h3 className="text-lg font-semibold mb-2">Group Study Hub</h3>
           <p className="text-sm">
             Collaborate, learn, and grow together. Build assignments, grade, and
             study with friends seamlessly.
@@ -15,7 +15,7 @@ const Footer = () => {
         </div>
 
         {/* Quick Links */}
-        <div className="w-full sm:w-1/3 mb-4 sm:mb-0">
+        <div className="w-full sm:w-1/3">
           <h4 className="text-lg font-semibold mb-2">Quick Links</h4>
           <ul className="list-none space-y-2 text-sm">
             <li>
@@ -44,46 +44,46 @@ const Footer = () => {
         {/* Contact & Social Media */}
         <div className="w-full sm:w-1/3">
           <h4 className="text-lg font-semibold mb-2">Contact Us</h4>
-          <ul className="list-none space-y-2 text-sm flex flex-wrap items-center gap-3">
-            <li>
+          <ul className="list-none space-y-2 text-sm">
+            <li className="flex items-center space-x-2">
               <a
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:underline flex items-center space-x-2"
+                className="flex items-center hover:underline"
               >
                 <FaGithub className="text-xl" />
                 <span>GitHub</span>
               </a>
             </li>
-            <li>
+            <li className="flex items-center space-x-2">
               <a
-                href="#" 
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:underline flex items-center space-x-2"
+                className="flex items-center hover:underline"
               >
                 <FaTwitter className="text-xl" />
                 <span>Twitter</span>
               </a>
             </li>
-            <li>
+            <li className="flex items-center space-x-2">
               <a
-                href="#" 
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:underline flex items-center space-x-2"
+                className="flex items-center hover:underline"
               >
                 <FaInstagram className="text-xl" />
                 <span>Instagram</span>
               </a>
             </li>
-            <li>
+            <li className="flex items-center space-x-2">
               <a
-                href="#" 
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:underline flex items-center space-x-2"
+                className="flex items-center hover:underline"
               >
                 <FaFacebook className="text-xl" />
                 <span>Facebook</span>
@@ -91,7 +91,7 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="mailto:assignmentbuddy@gmail.com"
                 className="hover:underline"
               >
                 Email: assignmentbuddy@gmail.com

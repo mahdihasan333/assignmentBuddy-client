@@ -13,18 +13,20 @@ const Assignments = () => {
   }, []);
 
   const fetchAssignments = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}/assignments`
-    );
-    setAssignments(data);
-    fetchAssignments();
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/assignments`
+      );
+      setAssignments(data);
+    } catch (error) {
+      console.error("Error fetching assignments:", error);
+    }
   };
 
-  // delete the assignment
+  // Delete the assignment
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${import.meta.env.VITE_API_URL}/assignment/${id}`);
-
       Swal.fire({
         title: "Success!",
         text: "Assignment Deleted successfully",
@@ -43,7 +45,7 @@ const Assignments = () => {
   };
 
   return (
-    <div className="my-16">
+    <div className="py-16 bg-white text-black dark:bg-gray-900 dark:text-gray-100">
       <div className="text-center space-y-4">
         <h2 className="text-2xl font-bold">Learn & Grade Together</h2>
         <p className="mt-4 text-lg">
@@ -51,7 +53,7 @@ const Assignments = () => {
           while fostering a community of learning.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
         {assignments.map((assignment) => (
           <AssignmentCard
             key={assignment._id}

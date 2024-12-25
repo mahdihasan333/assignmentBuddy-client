@@ -2,15 +2,18 @@ import React from "react";
 
 const Faq = () => {
   return (
-    <div className="pb-16">
+    <div className="w-11/12 mx-auto py-16 text-black dark:bg-gray-900 dark:text-white">
       <div className="text-center space-y-5 mb-9">
-        <h1 className="text-4xl font-bold text-center">
+        <h1 className="text-4xl font-bold">
           Frequently Asked Questions (FAQ)
         </h1>
-        <p>Everything You Need to Know About Our Online Group Study Platform</p>
+        <p>
+          Everything You Need to Know About Our Online Group Study Platform
+        </p>
       </div>
-      <div className="divider"></div>
-      <div className="collapse collapse-plus bg-base-200">
+      <div className="divider dark:border-b"></div>
+
+      <div className="collapse collapse-plus text-black dark:bg-gray-900 dark:text-white">
         <input type="radio" name="my-accordion-3" defaultChecked />
         <div className="collapse-title text-xl font-medium">
           What is this platform about?
@@ -23,9 +26,9 @@ const Faq = () => {
           </p>
         </div>
       </div>
-      <div className="divider"></div>
+      <div className="divider dark:border-b"></div>
 
-      <div className="collapse collapse-plus bg-base-200">
+      <div className="collapse collapse-plus text-black dark:bg-gray-900 dark:text-white">
         <input type="radio" name="my-accordion-3" />
         <div className="collapse-title text-xl font-medium">
           How do I register for an account?
@@ -38,9 +41,9 @@ const Faq = () => {
           </p>
         </div>
       </div>
-      <div className="divider"></div>
+      <div className="divider dark:border-b"></div>
 
-      <div className="collapse collapse-plus bg-base-200">
+      <div className="collapse collapse-plus text-black dark:bg-gray-900 dark:text-white">
         <input type="radio" name="my-accordion-3" />
         <div className="collapse-title text-xl font-medium">
           Are private routes secure?
@@ -52,9 +55,9 @@ const Faq = () => {
           </p>
         </div>
       </div>
-      <div className="divider"></div>
+      <div className="divider dark:border-b"></div>
 
-      <div className="collapse collapse-plus bg-base-200">
+      <div className="collapse collapse-plus text-black dark:bg-gray-900 dark:text-white">
         <input type="radio" name="my-accordion-3" />
         <div className="collapse-title text-xl font-medium">
           Can I access the platform without registering?
@@ -67,9 +70,9 @@ const Faq = () => {
           </p>
         </div>
       </div>
-      <div className="divider"></div>
+      <div className="divider dark:border-b"></div>
 
-      <div className="collapse collapse-plus bg-base-200">
+      <div className="collapse collapse-plus text-black dark:bg-gray-900 dark:text-white">
         <input type="radio" name="my-accordion-3" />
         <div className="collapse-title text-xl font-medium">
           How do I update an assignment?
@@ -81,7 +84,7 @@ const Faq = () => {
           </p>
         </div>
       </div>
-      <div className="divider"></div>
+      <div className="divider dark:border-b"></div>
     </div>
   );
 };
