@@ -55,23 +55,19 @@ const AssignmentCard = ({ assignment, handleDelete }) => {
         <h2 className="card-title text-xl font-bold text-gray-800 dark:text-white">
           {title}
         </h2>
-        <p className="text-sm text-gray-600 dark:text-white">
-          Deadline: {format(new Date(deadline), "P")}
-        </p>
+
         <div className="flex items-center gap-10 mt-2 text-gray-700 dark:text-white">
           <p className="font-medium">
             <span className="text-gray-900 dark:text-white">Marks:</span>{" "}
             {marks}
           </p>
           <p className="font-medium">
-            <span className="text-gray-900 dark:text-white">
-              Difficulty:
-            </span>{" "}
+            <span className="text-gray-900 dark:text-white">Difficulty:</span>{" "}
             {difficulty}
           </p>
         </div>
         <p className="mt-3 text-gray-600 dark:text-white line-clamp-3">
-          {description}
+          {description.substring(0, 20)}...
         </p>
 
         <div className="card-actions mt-4 flex gap-3">

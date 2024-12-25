@@ -24,6 +24,7 @@ const AssignmentDetails = () => {
     setAssignment(data);
     setStartDate(new Date(data.deadline));
   };
+  const assignmentCreator = assignment?.student?.email;
 
   const {
     _id,
@@ -64,6 +65,7 @@ const AssignmentDetails = () => {
       status: "Pending",
       userName,
       userEmail,
+      assignmentCreator,
     };
 
     try {
@@ -90,12 +92,12 @@ const AssignmentDetails = () => {
   };
 
   return (
-    <div className="card my-16 lg:card-side bg-base-100 shadow-xl transform transition-transform hover:scale-105">
-      <figure className="w-full lg:w-1/3 overflow-hidden">
+    <div className="w-11/12 mx-auto card my-16 lg:card-side bg-base-100 shadow-xl transform transition-transform hover:scale-105">
+      <figure className=" w-full p-4 lg:w-2/4  overflow-hidden">
         <img
           src={imageUrl}
           alt="Assignment"
-          className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-110"
+          className="w-full rounded-2xl h-full object-cover object-center transition-transform duration-300 hover:scale-110"
         />
       </figure>
       <div className="card-body p-6 lg:p-8">
@@ -106,11 +108,21 @@ const AssignmentDetails = () => {
             {format(new Date(deadline), "P")}
           </p>
         )}
+        <div className="flex items-center gap-10 mt-2 text-gray-700 dark:text-white">
+          <p className="font-medium">
+            <span className="text-gray-900 dark:text-white">Marks:</span>{" "}
+            {marks}
+          </p>
+          <p className="font-medium">
+            <span className="text-gray-900 dark:text-white">Difficulty:</span>{" "}
+            {difficulty}
+          </p>
+        </div>
         <p className="mt-4 text-gray-700">{description}</p>
 
-        <div className="mt-6">
+        <div className="mt-6 max-w-fit border-2 p-4 ">
           <h3 className="text-sm font-semibold text-gray-700">
-            Buyer Details:
+            Assignment Creator Details:
           </h3>
           <div className="flex items-center gap-4 mt-3">
             <div>

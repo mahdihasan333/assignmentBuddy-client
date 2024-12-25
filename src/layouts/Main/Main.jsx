@@ -7,7 +7,7 @@ import { ThemeContext } from "../../providers/ThemeProvider";
 const Main = () => {
   const { theme } = useContext(ThemeContext);
   return (
-    <div className={`${theme === "dark" ? "dark" : ""} dark:bg-gray-900 w-full`}>
+    <div className={`${theme === "dark" ? "dark" : ""} dark:bg-gray-900 w-full font-poppins`}>
       {/* Navbar */}
       <Navbar />
       {/* outlet */}

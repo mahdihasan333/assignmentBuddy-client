@@ -10,7 +10,6 @@ const PendingAssignments = () => {
 
   const [assignments, setAssignments] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedAssignment, setSelectedAssignment] = useState(null); // Track selected assignment
 
   useEffect(() => {
     fetchAssignments();
@@ -27,24 +26,42 @@ const PendingAssignments = () => {
     }
   };
 
-  const handleOpenModal = (assignment) => {
-    setSelectedAssignment(assignment); // Set the selected assignment
+  const handleOpenModal = () => {
     setModalVisible(true);
   };
 
   const handleCloseModal = () => {
     setModalVisible(false);
-    setSelectedAssignment(null); // Reset selected assignment when closing modal
   };
+
+  const title = assignments[0]?.userTitle;
+  const marks = assignments[0]?.userMarks;
+  const status = assignments[0]?.status;
+  const email = assignments[0]?.userEmail;
+  const examinerEmail = user?.email;
+  const assignmentCreator = assignments[0]?.assignmentCreator;
+  console.log(assignmentCreator)
+
+  
 
   const handleSubmitMarking = async (e) => {
     e.preventDefault();
 
     const form = e.target;
     const submitMark = form.submit_marks.value;
+    console.log(typeof submitMark, submitMark);
     const feedback = form.feedback.value;
 
-    if (user?.email === selectedAssignment?.userEmail) {
+    const markedUser = assignments?.userMarks;
+
+    if (Number(submitMark) > Number(markedUser))
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "action forbidden!.",
+      });
+
+    if (user?.email === assignments?.userEmail) {
       return Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -55,12 +72,18 @@ const PendingAssignments = () => {
     const markedAssignment = {
       submitMark,
       feedback,
-      userTitle: selectedAssignment?.userTitle,
-      userMarks: selectedAssignment?.userMarks,
-      userStatus: selectedAssignment?.status,
-      userEmail: selectedAssignment?.userEmail,
-      MarkedPersonEmail: user?.student?.email,
+      title,
+      marks,
+      status,
+      SubmitStatus: "Completed",
+      email,
+      examinerEmail,
+      assignmentCreator
     };
+
+
+
+    
 
     try {
       const { data } = await axios.post(
@@ -87,6 +110,8 @@ const PendingAssignments = () => {
       });
     }
   };
+  const titleUser = assignments[0]?.userTitle;
+  console.log(assignments[0]?.userTitle, "user", titleUser);
 
   return (
     <div className="px-4 mx-auto py-16 dark:bg-gray-900 dark:text-white">
@@ -124,7 +149,7 @@ const PendingAssignments = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800">
-                  {assignments.map((assignment) => (
+                  {assignments.filter(assign => assign._id !== assignments[0]._id).map((assignment) => (
                     <tr key={assignment._id}>
                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
                         {assignment.userTitle}
@@ -166,16 +191,16 @@ const PendingAssignments = () => {
               Mark Assignment
             </h3>
             <p className="mt-2 text-sm text-gray-600 dark:text-white">
-              <strong>Title:</strong> {selectedAssignment?.userTitle}
+              <strong>Title:</strong> {assignments[0]?.userTitle}
             </p>
             <p className="mt-2 text-sm text-gray-600 dark:text-white">
-              <strong>Notes:</strong> {selectedAssignment?.note}
+              <strong>Notes:</strong> {assignments[0]?.note}
             </p>
             <p className="mt-2 text-sm text-gray-600 dark:text-white">
-              <strong>Marks:</strong> {selectedAssignment?.userMarks}
+              <strong>Marks:</strong> {assignments[0]?.userMarks}
             </p>
             <a
-              href={selectedAssignment?.docs}
+              href={assignments[0]?.docs}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 underline mt-2 block dark:text-blue-400"

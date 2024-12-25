@@ -19,7 +19,7 @@ const Assignments = () => {
       );
       setAssignments(data);
     } catch (error) {
-      console.error("Error fetching assignments:", error);
+      console.error(error);
     }
   };
 

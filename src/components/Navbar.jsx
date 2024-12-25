@@ -78,17 +78,17 @@ const Navbar = () => {
                   Logout
                 </button>
                 {/* Image dropdown */}
-                <div className="dropdown bg-gray-900 dropdown-end z-50">
+                <div className="dropdown dark:bg-gray-900 dropdown-end z-50">
                   <div
                     tabIndex={0}
                     role="button"
-                    className="btn btn-ghost btn-circle avatar"
+                    className="btn bg-none btn-ghost btn-circle avatar"
                   >
                     <div
                       data-tooltip-id="my-tooltip"
-                      className="w-10 rounded-full"
+                      className="w-10 bg-none rounded-full"
                     >
-                      <img
+                      <img 
                         referrerPolicy="no-referrer"
                         alt="User Profile Photo"
                         src={user?.photoURL}
@@ -102,7 +102,7 @@ const Navbar = () => {
                   </div>
                   <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-900 rounded-box w-52"
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow dark:bg-gray-900 rounded-box w-52"
                   >
                     {user && (
                       <li className="text-black dark:bg-gray-900 dark:text-white">
