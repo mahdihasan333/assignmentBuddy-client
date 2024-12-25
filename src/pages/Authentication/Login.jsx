@@ -3,8 +3,11 @@ import google from "../../assets/image/Google.webp";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext } from "react";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState()
   const { loginUser, setUser, loginWithGoogle } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
@@ -80,17 +83,32 @@ const Login = () => {
                 required
               />
             </div>
+            
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text-alt link link-hover">Password</span>
               </label>
               <input
-                type="password"
-                placeholder="Password"
+                type={showPassword ? "text" : "password"}
                 name="password"
+                placeholder="password"
                 className="input input-bordered"
                 required
               />
+              <button
+                onClick={() => setShowPassword(!showPassword)}
+                className="btn btn-xs absolute right-11 top-44"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+              <label className="label">
+                <a
+                  
+                  className="label-text-alt link link-hover"
+                >
+                  Forgot password?
+                </a>
+              </label>
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>

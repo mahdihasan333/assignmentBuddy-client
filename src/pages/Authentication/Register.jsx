@@ -1,11 +1,15 @@
 import Lottie from "react-lottie";
 import registerLottieData from "../../assets/lottie/Register.json";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 
 const Register = () => {
+  const [showPassword, setShowPassword] = useState();
+  const navigate = useNavigate();
   const { createNewUser, setUser } = useContext(AuthContext);
 
   const handleSignUp = (e) => {
@@ -49,6 +53,7 @@ const Register = () => {
           icon: "success",
           confirmButtonText: "Ok",
         });
+        navigate("/");
       })
       .catch((error) => {
         Swal.fire({
@@ -145,17 +150,24 @@ const Register = () => {
                 required
               />
             </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="password"
-                placeholder="Password"
+                type={showPassword ? "text" : "password"}
                 name="password"
+                placeholder="password"
                 className="input input-bordered"
                 required
               />
+              <button
+                onClick={() => setShowPassword(!showPassword)}
+                className="btn btn-xs absolute right-11 top-[358px]"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Register</button>
