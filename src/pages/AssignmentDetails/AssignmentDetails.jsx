@@ -92,18 +92,18 @@ const AssignmentDetails = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto card my-16 lg:card-side bg-base-100 shadow-xl transform transition-transform hover:scale-105">
-      <figure className=" w-full p-4 lg:w-2/4  overflow-hidden">
+    <div className="w-11/12 mx-auto dark:text-white card py-8 lg:card-side bg-base-100 shadow-xl transform transition-transform hover:scale-105 dark:bg-cyan-900">
+      <figure className=" w-full h-96 p-4 lg:w-2/4  overflow-auto">
         <img
           src={imageUrl}
           alt="Assignment"
-          className="w-full rounded-2xl h-full object-cover object-center transition-transform duration-300 hover:scale-110"
+          className="w-full  rounded-2xl h-full object-cover object-center transition-transform duration-300 hover:scale-110"
         />
       </figure>
       <div className="card-body p-6 lg:p-8">
-        <h2 className="card-title text-2xl font-bold text-gray-800">{title}</h2>
+        <h2 className="card-title text-2xl dark:text-white font-bold text-gray-800">{title}</h2>
         {deadline && (
-          <p className="text-gray-600 text-sm mt-2">
+          <p className="text-gray-600 dark:text-white text-sm mt-2">
             <span className="font-semibold">Deadline:</span>{" "}
             {format(new Date(deadline), "P")}
           </p>
@@ -118,16 +118,16 @@ const AssignmentDetails = () => {
             {difficulty}
           </p>
         </div>
-        <p className="mt-4 text-gray-700">{description}</p>
+        <p className="mt-4 dark:text-white text-gray-700">{description}</p>
 
         <div className="mt-6 max-w-fit border-2 p-4 ">
-          <h3 className="text-sm font-semibold text-gray-700">
+          <h3 className="text-sm dark:text-white font-semibold text-gray-700">
             Assignment Creator Details:
           </h3>
           <div className="flex items-center gap-4 mt-3">
             <div>
-              <p className="text-sm text-gray-600">Name: {student?.name}</p>
-              <p className="text-sm text-gray-600">Email: {student?.email}</p>
+              <p className="text-sm dark:text-white text-gray-600">Name: {student?.name}</p>
+              <p className="text-sm dark:text-white text-gray-600">Email: {student?.email}</p>
             </div>
             <div className="rounded-full overflow-hidden w-14 h-14">
               <img

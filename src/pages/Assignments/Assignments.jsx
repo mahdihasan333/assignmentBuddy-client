@@ -59,7 +59,7 @@ const Assignments = () => {
   };
 
   return (
-    <div className="py-16 bg-white text-black dark:bg-gray-900 dark:text-gray-100">
+    <div className="py-16 bg-white text-black dark:bg-gray-900 dark:text-white">
       <div className="text-center space-y-4">
         <h2 className="text-2xl font-bold">Learn & Grade Together</h2>
         <p className="mt-4 text-lg">
@@ -69,11 +69,11 @@ const Assignments = () => {
       </div>
 
       <div className="flex my-10 flex-col md:flex-row justify-center items-center gap-5 ">
-        <div>
+        <div className="">
           <select
             name="category"
             id="category"
-            className="border p-4 rounded-lg"
+            className="border p-4 rounded-lg dark:bg-gray-900 dark:text-white"
             onChange={(e) => setFilter(e.target.value)}
             value={filter}
           >

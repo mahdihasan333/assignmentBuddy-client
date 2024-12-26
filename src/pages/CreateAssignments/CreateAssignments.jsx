@@ -107,7 +107,7 @@ const CreateAssignments = () => {
               {/* Date Picker Input Field */}
               <DatePicker
                 name="startDate"
-                className="border p-2 rounded-md"
+                className="border text-black p-2 rounded-md"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
               />
@@ -120,7 +120,7 @@ const CreateAssignments = () => {
               <select
                 name="difficulty_level"
                 id="difficulty_level"
-                className="border p-2 rounded-md"
+                className="border text-black p-2 rounded-md"
               >
                 <option value="easy">EASY</option>
                 <option value="medium">MEDIUM</option>

@@ -25,7 +25,7 @@ const MyAttemptedAssignments = () => {
   return (
     <div className="container px-4 mx-auto pt-12">
       <div className="text-black dark:bg-gray-900 dark:text-white flex items-center gap-x-3">
-        <h2 className="text-lg font-medium text-gray-800">
+        <h2 className="text-lg font-medium dark:text-white">
           My Attempted Assignments
         </h2>
 
@@ -39,11 +39,11 @@ const MyAttemptedAssignments = () => {
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden border border-gray-200 md:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+                <thead className="bg-gray-50 dark:bg-gray-800 dark:text-white">
                   <tr>
                     <th
                       scope="col"
-                      className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500"
+                      className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right dark:text-white"
                     >
                       <div className="flex items-center gap-x-3">
                         <span>Title</span>
@@ -51,34 +51,34 @@ const MyAttemptedAssignments = () => {
                     </th>
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right dark:text-white"
                     >
                       <span>Status</span>
                     </th>
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right dark:text-white"
                     >
                       <span>Assignment Marks</span>
                     </th>
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right dark:text-white"
                     >
                       Obtained Marks
                     </th>
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right dark:text-white"
                     >
                       Feedback
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800">
                   {assignments.map((assignment) => (
                     <tr key={assignment._id}>
-                      <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                      <td className="px-4 py-4 text-sm dark:text-white whitespace-nowrap">
                         {assignment?.title}
                       </td>
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
@@ -96,13 +96,13 @@ const MyAttemptedAssignments = () => {
                           </p>
                         </div>
                       </td>
-                      <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                      <td className="px-4 py-4 text-sm dark:text-white whitespace-nowrap">
                         {assignment?.marks}
                       </td>
-                      <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                      <td className="px-4 py-4 text-sm dark:text-white whitespace-nowrap">
                         {assignment.submitMark}
                       </td>
-                      <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                      <td className="px-4 py-4 text-sm dark:text-white whitespace-nowrap">
                         {assignment?.feedback?.substring(0, 5)}...
                       </td>
                     </tr>

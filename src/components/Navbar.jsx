@@ -130,7 +130,7 @@ const Navbar = () => {
           <input
             type="checkbox"
             className="toggle"
-            checked={isDarkMode} // Assuming isDarkMode from ThemeContext
+            checked={isDarkMode} 
             onChange={toggleTheme}
           />
         </button>

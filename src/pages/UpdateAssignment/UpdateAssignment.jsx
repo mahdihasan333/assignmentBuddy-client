@@ -120,7 +120,7 @@ const UpdateAssignment = () => {
 
               {/* Date Picker Input Field */}
               <DatePicker
-                className="border p-2 rounded-md"
+                className="border p-2 dark:text-black rounded-md"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
               />
@@ -134,7 +134,7 @@ const UpdateAssignment = () => {
                 name="difficulty_level"
                 id="difficulty_level"
                 defaultValue={assignment?.difficulty}
-                className="border p-2 rounded-md"
+                className="border dark:text-black p-2 rounded-md"
               >
                 <option value="easy">EASY</option>
                 <option value="medium">MEDIUM</option>
