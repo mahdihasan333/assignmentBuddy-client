@@ -14,8 +14,7 @@ const MyAttemptedAssignments = () => {
   const fetchAssignments = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/marked-assignments/${user?.email}`,
-        { withCredentials: true }
+        `${import.meta.env.VITE_API_URL}/marked-assignments/${user?.email}`, {withCredentials: true}
       );
       setAssignments(data);
     } catch (error) {
@@ -84,8 +83,10 @@ const MyAttemptedAssignments = () => {
                       </td>
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
                         <div className="flex items-center gap-x-2">
-                          <p>
-                            {assignment?.SubmitStatus ? assignment.SubmitStatus : assignment.status}
+                          <p
+                            
+                          >
+                            {assignment?.SubmitStatus ? 'Completed' : 'Pending'}
                           </p>
                         </div>
                       </td>
@@ -93,7 +94,7 @@ const MyAttemptedAssignments = () => {
                         {assignment?.marks}
                       </td>
                       <td className="px-4 py-4 text-sm dark:text-white whitespace-nowrap">
-                        {assignment.submitMark}
+                        {assignment?.submitMark}
                       </td>
                       <td className="px-4 py-4 text-sm dark:text-white whitespace-nowrap">
                         {assignment?.feedback?.substring(0, 5)}...
