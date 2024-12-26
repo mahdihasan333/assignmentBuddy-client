@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <section className="w-full">
-      <div className="navbar dark:bg-gray-800 dark:text-white bg-base-100 lg:px-12">
+      <div className="navbar dark:bg-gray-800 dark:text-white bg-green-300 lg:px-12">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

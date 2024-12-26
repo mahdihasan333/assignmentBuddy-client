@@ -8,7 +8,7 @@ const Features = () => {
           Key Features
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="card bg-base-100 shadow-md hover:shadow-lg transition-shadow p-6">
+          <div className="card bg-green-300 shadow-md hover:shadow-lg transition-shadow p-6">
             <div className="text-4xl mb-4">📝</div>
             <h3 className="text-xl font-semibold mb-2">Create Assignments</h3>
             <p className="text-sm">
@@ -17,7 +17,7 @@ const Features = () => {
             </p>
           </div>
 
-          <div className="card bg-base-100 shadow-md hover:shadow-lg transition-shadow p-6">
+          <div className="card bg-green-300 shadow-md hover:shadow-lg transition-shadow p-6">
             <div className="text-4xl mb-4">🤝</div>
             <h3 className="text-xl font-semibold mb-2">
               Collaborative Learning
@@ -28,7 +28,7 @@ const Features = () => {
             </p>
           </div>
 
-          <div className="card bg-base-100 shadow-md hover:shadow-lg transition-shadow p-6">
+          <div className="card bg-green-300 shadow-md hover:shadow-lg transition-shadow p-6">
             <div className="text-4xl mb-4">🔒</div>
             <h3 className="text-xl font-semibold mb-2">
               Secure Authentication
@@ -39,7 +39,7 @@ const Features = () => {
             </p>
           </div>
 
-          <div className="card bg-base-100 shadow-md hover:shadow-lg transition-shadow p-6">
+          <div className="card bg-green-300 shadow-md hover:shadow-lg transition-shadow p-6">
             <div className="text-4xl mb-4">🎨</div>
             <h3 className="text-xl font-semibold mb-2">Theme Customization</h3>
             <p className="text-sm">
@@ -47,7 +47,7 @@ const Features = () => {
             </p>
           </div>
 
-          <div className="card bg-base-100 shadow-md hover:shadow-lg transition-shadow p-6">
+          <div className="card bg-green-300 shadow-md hover:shadow-lg transition-shadow p-6">
             <div className="text-4xl mb-4">📱</div>
             <h3 className="text-xl font-semibold mb-2">Responsive Design</h3>
             <p className="text-sm">

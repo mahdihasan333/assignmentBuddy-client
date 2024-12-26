@@ -23,7 +23,7 @@ const MyAttemptedAssignments = () => {
   };
 
   return (
-    <div className="container px-4 mx-auto pt-12">
+    <div className="w-11/12 px-10 mx-auto py-12">
       <div className="text-black dark:bg-gray-900 dark:text-white flex items-center gap-x-3">
         <h2 className="text-lg font-medium dark:text-white">
           My Attempted Assignments

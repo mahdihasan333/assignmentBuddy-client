@@ -104,7 +104,7 @@ const PendingAssignments = () => {
   const titleUser = assignments[0]?.userTitle;
 
   return (
-    <div className="px-4 mx-auto py-16 dark:bg-gray-900 dark:text-white">
+    <div className="w-11/12 mx-auto py-16 dark:bg-gray-900 dark:text-white px-10">
       <div className="flex items-center gap-x-3">
         <h2 className="text-lg font-medium text-gray-800 dark:text-white">
           My Pending Assignments
