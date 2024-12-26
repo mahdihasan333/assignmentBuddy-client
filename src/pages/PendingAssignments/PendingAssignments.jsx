@@ -141,10 +141,10 @@ const PendingAssignments = () => {
                     .map((assignment) => (
                       <tr key={assignment._id}>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
-                          {assignment.userTitle}
+                          {assignment.title}
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
-                          {assignment?.userMarks}
+                          {assignment?.marks}
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-white">
                           {assignment?.userName}

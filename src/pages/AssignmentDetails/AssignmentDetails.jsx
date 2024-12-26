@@ -58,10 +58,10 @@ const AssignmentDetails = () => {
 
     const userAssignmentData = {
       docs,
-      userTitle,
+      title,
       note,
       userId,
-      userMarks,
+      marks,
       status: "Pending",
       userName,
       userEmail,
@@ -180,7 +180,7 @@ const AssignmentDetails = () => {
                 </label>
                 <textarea
                   placeholder="Enter a quick note"
-                  className="textarea textarea-bordered"
+                  className="textarea text-black textarea-bordered"
                   name="note"
                   required
                 ></textarea>
