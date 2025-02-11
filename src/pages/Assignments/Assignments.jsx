@@ -106,7 +106,7 @@ const Assignments = () => {
               aria-label="Enter Assignment Title"
             />
 
-            <button className="px-4 py-2 text-sm font-medium text-white uppercase bg-blue-600 rounded-md hover:bg-blue-500 transition-all duration-300">
+            <button className="px-4 py-2 text-sm font-medium text-white uppercase bg-green-500 rounded-md hover:bg-blue-500 transition-all duration-300">
               Search
             </button>
           </div>
@@ -121,7 +121,7 @@ const Assignments = () => {
       </div>
 
       {/* Assignment Cards Section */}
-      <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10">
+      <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
         {loading ? (
           <div className="col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4 flex justify-center">
             <Spinner />

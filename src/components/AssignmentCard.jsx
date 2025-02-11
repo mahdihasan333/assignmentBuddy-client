@@ -46,7 +46,7 @@ const AssignmentCard = ({ assignment, handleDelete }) => {
         <img
           src={imageUrl}
           alt="Assignment Cover"
-          className="w-full rounded-2xl h-64 object-cover transition-transform duration-500 hover:scale-110"
+          className="w-full h-64 object-cover transition-transform duration-500 hover:scale-110"
         />
       </figure>
       <div className="card-body">
@@ -54,21 +54,23 @@ const AssignmentCard = ({ assignment, handleDelete }) => {
           {title}
         </h2>
 
+        <p className="text-gray-700 dark:text-white mt-2 text-sm line-clamp-2">
+          {description}
+        </p>
+
         <div className="flex items-center gap-10 mt-2 text-gray-700 dark:text-white">
           <p className="font-medium">
-            <span className="text-gray-900 dark:text-white">Marks:</span>{" "}
-            {marks}
+            Marks: {marks}
           </p>
           <p className="font-medium">
-            <span className="text-gray-900 dark:text-white">Difficulty:</span>{" "}
-            {difficulty}
+            Difficulty: {difficulty}
           </p>
         </div>
 
         <div className="card-actions mt-4 flex flex-wrap gap-3">
           <Link to={`/assignment/${_id}`}>
             <button className="btn btn-primary hover:bg-blue-700 dark:hover:bg-blue-800 transition-all">
-              View Assignment
+              See More
             </button>
           </Link>
           <Link to={`/update/${_id}`}>
