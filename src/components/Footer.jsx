@@ -1,104 +1,44 @@
 import React from "react";
-import { FaGithub, FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa"; // You can use icons like these for social links
 
-const Footer = () => {
+const Footer = ({ isDarkMode }) => {
   return (
-    <footer className="bg-base-300 text-base-content dark:bg-black dark:text-gray-100 py-8">
-      <div className="container mx-auto flex flex-wrap justify-between items-start px-4 space-y-6 sm:space-y-0">
-        {/* About Section */}
-        <div className="w-full sm:w-1/3">
-          <h3 className="text-lg font-semibold mb-2">Group Study Hub</h3>
-          <p className="text-sm">
-            Collaborate, learn, and grow together. Build assignments, grade, and
-            study with friends seamlessly.
-          </p>
+    <footer
+      className={`w-full py-8 px-4 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-200'} text-white`}
+    >
+      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+        {/* Logo and Text */}
+        <div className="text-center md:text-left mb-6 md:mb-0">
+          <h1 className="text-3xl font-bold text-green-500">Assignment Buddy</h1>
+          <p className="mt-2 text-sm text-gray-400">Your ultimate assignment assistant</p>
         </div>
 
-        {/* Quick Links */}
-        <div className="w-full sm:w-1/3">
-          <h4 className="text-lg font-semibold mb-2">Quick Links</h4>
-          <ul className="list-none space-y-2 text-sm">
-            <li>
-              <a href="/" className="hover:underline">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="/assignments" className="hover:underline">
-                Assignments
-              </a>
-            </li>
-            <li>
-              <a href="/my-assignments" className="hover:underline">
-                My Assignments
-              </a>
-            </li>
-            <li>
-              <a href="/create-assignment" className="hover:underline">
-                Create Assignment
-              </a>
-            </li>
-          </ul>
+        {/* Links */}
+        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-center md:text-left">
+          <Link to="/" className="text-gray-400 hover:text-gray-300">Home</Link>
+          <Link to="/assignments" className="text-gray-400 hover:text-gray-300">Assignments</Link>
+
+          <Link to="/contact" className="text-gray-400 hover:text-gray-300">Contact</Link>
         </div>
 
-        {/* Contact & Social Media */}
-        <div className="w-full sm:w-1/3">
-          <h4 className="text-lg font-semibold mb-2">Contact Us</h4>
-          <ul className="list-none space-y-2 text-sm">
-            <li className="flex items-center space-x-2">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center hover:underline"
-              >
-                <FaGithub className="text-xl" />
-                <span>GitHub</span>
-              </a>
-            </li>
-            <li className="flex items-center space-x-2">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center hover:underline"
-              >
-                <FaTwitter className="text-xl" />
-                <span>Twitter</span>
-              </a>
-            </li>
-            <li className="flex items-center space-x-2">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center hover:underline"
-              >
-                <FaInstagram className="text-xl" />
-                <span>Instagram</span>
-              </a>
-            </li>
-            <li className="flex items-center space-x-2">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center hover:underline"
-              >
-                <FaFacebook className="text-xl" />
-                <span>Facebook</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="mailto:assignmentbuddy@gmail.com"
-                className="hover:underline"
-              >
-                Email: assignmentbuddy@gmail.com
-              </a>
-            </li>
-          </ul>
+        {/* Social Links */}
+        <div className="flex space-x-6 mt-4 md:mt-0 justify-center">
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+            <FaFacebook className="text-gray-400 hover:text-gray-300 text-2xl" />
+          </a>
+          <a href="https://github.com/mahdihasan333" target="_blank" rel="noopener noreferrer">
+            <FaGithub className="text-gray-400 hover:text-gray-300 text-2xl" />
+          </a>
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+            <FaLinkedin className="text-gray-400 hover:text-gray-300 text-2xl" />
+          </a>
         </div>
+      </div>
+
+      {/* Footer Bottom */}
+      <div className="mt-8 text-center text-gray-400 text-sm">
+        <p>&copy; 2025 Assignment Buddy. All Rights Reserved.</p>
       </div>
     </footer>
   );

@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { Tooltip } from "react-tooltip";
 import { ThemeContext } from "../providers/ThemeProvider";
+import logo from '../assets/image/assignment-buddy.webp';
 
 const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
@@ -13,7 +14,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* Logo */}
         <Link to="/" className="text-xl font-bold text-white">
-          SmartAssign
+          <img src={logo} alt="SmartAssign Logo" className="h-10" />
         </Link>
 
         {/* Menu Items */}
