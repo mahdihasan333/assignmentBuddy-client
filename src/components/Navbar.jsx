@@ -21,6 +21,7 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6">
           <NavLink to="/" className="text-white hover:text-gray-300">Home</NavLink>
           <NavLink to="/assignments" className="text-white hover:text-gray-300">Assignments</NavLink>
+          <NavLink to="/contact" className="text-white hover:text-gray-300">Contact</NavLink>
           {user && (
             <NavLink to="/pendingAssignments" className="text-white hover:text-gray-300">
               Pending Assignments

@@ -38,7 +38,7 @@ const Footer = ({ isDarkMode }) => {
 
       {/* Footer Bottom */}
       <div className="mt-8 text-center text-gray-400 text-sm">
-        <p>&copy; 2025 Assignment Buddy. All Rights Reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Assignment Buddy. All Rights Reserved.</p>
       </div>
     </footer>
   );

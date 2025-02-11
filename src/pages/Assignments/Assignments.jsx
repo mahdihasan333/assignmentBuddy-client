@@ -70,7 +70,7 @@ const Assignments = () => {
   };
 
   return (
-    <div className="py-16 bg-white text-black dark:bg-gray-900 dark:text-white transition-all duration-300">
+    <div className="py-16 mt-8 bg-white text-black dark:bg-gray-900 dark:text-white transition-all duration-300">
       <div className="text-center space-y-4">
         <h2 className="text-2xl font-bold">Learn & Grade Together</h2>
         <p className="mt-4 text-lg">
