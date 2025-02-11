@@ -21,6 +21,8 @@ const MyAttemptedAssignments = () => {
       console.error("Error fetching assignments:", error);
     }
   };
+  console.log(assignments)
+
 
   return (
     <div className="w-11/12 px-10 mx-auto py-12">
@@ -83,10 +85,8 @@ const MyAttemptedAssignments = () => {
                       </td>
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
                         <div className="flex items-center gap-x-2">
-                          <p
-                            
-                          >
-                            {assignment?.SubmitStatus ? 'Completed' : 'Pending'}
+                          <p>
+                            {assignment?.SubmitStatus ? assignment.SubmitStatus : assignment.status}
                           </p>
                         </div>
                       </td>

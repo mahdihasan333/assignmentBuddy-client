@@ -25,6 +25,7 @@ const PendingAssignments = () => {
       console.error("Error fetching assignments:", error);
     }
   };
+  console.log(assignments)
 
   const handleOpenModal = () => {
     setModalVisible(true);
