@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { ThemeContext } from "../providers/ThemeProvider";
-import logo from '../assets/image/assignment-buddy.webp';
+import logo from "../assets/image/assignment-buddy.webp";
 
 const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
@@ -38,11 +38,20 @@ const Navbar = () => {
 
         {/* Menu Items */}
         <div className="hidden md:flex space-x-6">
-          <NavLink to="/" className="text-white hover:text-gray-300">Home</NavLink>
-          <NavLink to="/assignments" className="text-white hover:text-gray-300">Assignments</NavLink>
-          <NavLink to="/contact" className="text-white hover:text-gray-300">Contact</NavLink>
+          <NavLink to="/" className="text-white hover:text-gray-300">
+            Home
+          </NavLink>
+          <NavLink to="/assignments" className="text-white hover:text-gray-300">
+            Assignments
+          </NavLink>
+          <NavLink to="/contact" className="text-white hover:text-gray-300">
+            Contact
+          </NavLink>
           {user && (
-            <NavLink to="/pendingAssignments" className="text-white hover:text-gray-300">
+            <NavLink
+              to="/pendingAssignments"
+              className="text-white hover:text-gray-300"
+            >
               Pending Assignments
             </NavLink>
           )}
@@ -72,12 +81,45 @@ const Navbar = () => {
               {/* Dropdown Menu */}
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-green-500 dark:bg-gray-900 text-white shadow-lg rounded-lg p-2">
-                  <Link to="/createAssignments" className="block px-4 py-2 hover:bg-green-600 rounded">
+                  <NavLink
+                    to="/"
+                    className="block lg:hidden text-white px-4 py-2 hover:text-gray-300"
+                  >
+                    Home
+                  </NavLink>
+                  <NavLink
+                    to="/assignments"
+                    className="text-white lg:hidden block px-4 py-2 hover:text-gray-300"
+                  >
+                    Assignments
+                  </NavLink>
+                  <Link
+                    to="/createAssignments"
+                    className="block px-4 py-2 hover:bg-green-600 rounded"
+                  >
                     Create Assignments
                   </Link>
-                  <Link to="/attemptAssignments" className="block px-4 py-2 hover:bg-green-600 rounded">
+                  <Link
+                    to="/attemptAssignments"
+                    className="block px-4 py-2 hover:bg-green-600 rounded"
+                  >
                     My Attempted Assignments
                   </Link>
+
+                  
+                  <NavLink
+                    to="/contact"
+                    className="text-white lg:hidden block px-4 py-2 hover:text-gray-300"
+                  >
+                    Contact
+                  </NavLink>
+                  <NavLink
+                    to="/pendingAssignments"
+                    className="text-white lg:hidden block px-4 py-2 hover:text-gray-300"
+                  >
+                    Pending Assignments
+                  </NavLink>
+
                   <button
                     onClick={logoutUser}
                     className="w-full text-left px-4 py-2 hover:bg-red-600 rounded"
