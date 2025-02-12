@@ -2,7 +2,7 @@ import React from "react";
 
 const Features = () => {
   return (
-    <section className="py-12 text-black">
+    <section className="w-11/12 mx-auto py-12 text-black">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-bold dark:text-white mb-8">
           Key Features

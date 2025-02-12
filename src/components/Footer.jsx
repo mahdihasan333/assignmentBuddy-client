@@ -7,7 +7,7 @@ const Footer = ({ isDarkMode }) => {
     <footer
       className={`w-full py-8 px-4 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-200'} text-white`}
     >
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+      <div className="w-11/12 mx-auto flex flex-col md:flex-row justify-between items-center">
         {/* Logo and Text */}
         <div className="text-center md:text-left mb-6 md:mb-0">
           <h1 className="text-3xl font-bold text-green-500">Assignment Buddy</h1>

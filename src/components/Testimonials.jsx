@@ -38,7 +38,7 @@ const StarRating = ({ rating }) => {
 
 const Testimonials = () => {
   return (
-    <div className="max-w-6xl mx-auto my-16 p-6 text-center">
+    <div className="w-11/12 mx-auto my-16  text-center">
       <h2 className="text-3xl font-bold mb-8 dark:text-white">
         What Our Users Say
       </h2>
