@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
-const AssignmentCard = ({ assignment, handleDelete }) => {
+const AssignmentCard = ({ assignment, handleDelete, isDarkMode }) => {
   const { user } = useContext(AuthContext);
   const {
     _id,
@@ -30,7 +30,7 @@ const AssignmentCard = ({ assignment, handleDelete }) => {
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
+      cancelButtonColor: "#22c55e",
       confirmButtonText: "Yes, delete it!",
       cancelButtonText: "Cancel",
     }).then((result) => {
@@ -41,7 +41,11 @@ const AssignmentCard = ({ assignment, handleDelete }) => {
   };
 
   return (
-    <div className="card bg-blue-100 dark:bg-base-800 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 text-black dark:bg-indigo-400 dark:text-white">
+    <div
+      className={`card shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 ${
+        isDarkMode ? "bg-gray-900 text-white" : "bg-gray-200 text-black"
+      }`}
+    >
       <figure className="relative overflow-hidden p-4">
         <img
           src={imageUrl}
@@ -50,37 +54,29 @@ const AssignmentCard = ({ assignment, handleDelete }) => {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title text-xl font-bold text-gray-800 dark:text-white">
-          {title}
-        </h2>
+        <h2 className="card-title text-xl font-bold">{title}</h2>
 
-        <p className="text-gray-700 dark:text-white mt-2 text-sm line-clamp-2">
-          {description}
-        </p>
+        <p className="mt-2 text-sm line-clamp-2">{description}</p>
 
-        <div className="flex items-center gap-10 mt-2 text-gray-700 dark:text-white">
-          <p className="font-medium">
-            Marks: {marks}
-          </p>
-          <p className="font-medium">
-            Difficulty: {difficulty}
-          </p>
+        <div className="flex items-center gap-10 mt-2">
+          <p className="font-medium">{marks}</p>
+          <p className="font-medium">{difficulty}</p>
         </div>
 
         <div className="card-actions mt-4 flex flex-wrap gap-3">
           <Link to={`/assignment/${_id}`}>
-            <button className="btn btn-primary hover:bg-blue-700 dark:hover:bg-blue-800 transition-all">
+            <button className="btn border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all">
               See More
             </button>
           </Link>
           <Link to={`/update/${_id}`}>
-            <button className="btn btn-secondary hover:bg-green-600 dark:hover:bg-green-700 transition-all">
+            <button className="btn bg-green-500 text-white hover:bg-green-600 transition-all">
               Update
             </button>
           </Link>
           <button
             onClick={() => confirmDelete(_id)}
-            className="btn btn-error hover:bg-red-700 dark:hover:bg-red-800 transition-all"
+            className="btn btn-error text-white hover:bg-red-700 transition-all"
           >
             Delete
           </button>

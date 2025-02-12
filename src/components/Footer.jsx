@@ -5,7 +5,7 @@ import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa"; // You can us
 const Footer = ({ isDarkMode }) => {
   return (
     <footer
-      className={`w-full py-8 px-4 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-200'} text-white`}
+      className={`w-full mt-10 py-8 px-4 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-200'} text-white`}
     >
       <div className="w-11/12 mx-auto flex flex-col md:flex-row justify-between items-center">
         {/* Logo and Text */}

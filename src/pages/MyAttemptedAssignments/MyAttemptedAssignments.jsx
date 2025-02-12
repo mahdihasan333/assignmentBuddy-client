@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const MyAttemptedAssignments = () => {
   const { user } = useContext(AuthContext);
-
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
@@ -14,100 +14,100 @@ const MyAttemptedAssignments = () => {
   const fetchAssignments = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/marked-assignments/${user?.email}`, {withCredentials: true}
+        `${import.meta.env.VITE_API_URL}/marked-assignments/${user?.email}`,
+        { withCredentials: true }
       );
       setAssignments(data);
     } catch (error) {
       console.error("Error fetching assignments:", error);
     }
   };
-  console.log(assignments)
-
 
   return (
-    <div className="w-11/12 px-10 mx-auto py-12">
-      <div className="text-black dark:bg-gray-900 dark:text-white flex items-center gap-x-3">
-        <h2 className="text-lg font-medium dark:text-white">
-          My Attempted Assignments
-        </h2>
+    <>
+      <Helmet>
+        <title>Assignment Buddy | My Attempted Assignments</title>
+      </Helmet>
 
-        <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full">
-          {assignments?.length} assignment
-        </span>
-      </div>
+      <div className="w-11/12 mt-8 mx-auto py-12">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            My Attempted Assignments
+          </h2>
+          <span className="px-3 py-1 text-sm font-medium text-green-600 bg-green-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
+            {assignments.length} Assignment{assignments.length !== 1 && "s"}
+          </span>
+        </div>
 
-      <div className="text-black dark:bg-gray-900 dark:text-white flex flex-col pt-6">
-        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-            <div className="overflow-hidden border border-gray-200 md:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50 dark:bg-gray-800 dark:text-white">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right dark:text-white"
-                    >
-                      <div className="flex items-center gap-x-3">
-                        <span>Title</span>
-                      </div>
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right dark:text-white"
-                    >
-                      <span>Status</span>
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right dark:text-white"
-                    >
-                      <span>Assignment Marks</span>
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right dark:text-white"
-                    >
-                      Obtained Marks
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right dark:text-white"
-                    >
-                      Feedback
-                    </th>
+        <div className="overflow-hidden border border-gray-300 dark:border-gray-700 rounded-lg shadow-md">
+          <table className="min-w-full text-left bg-white dark:bg-gray-800">
+            <thead className="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-200">
+              <tr>
+                <th className="px-6 py-3 text-sm font-medium">Title</th>
+                <th className="px-6 py-3 text-sm font-medium">Status</th>
+                <th className="px-6 py-3 text-sm font-medium">Total Marks</th>
+                <th className="px-6 py-3 text-sm font-medium">Obtained Marks</th>
+                <th className="px-6 py-3 text-sm font-medium">Feedback</th>
+              </tr>
+            </thead>
+            <tbody>
+              {assignments.length > 0 ? (
+                assignments.map((assignment) => (
+                  <tr
+                    key={assignment._id}
+                    className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
+                  >
+                    <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-100 font-medium">
+                      {assignment?.title}
+                    </td>
+                    <td className="px-6 py-4 text-sm">
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                          assignment?.SubmitStatus === "Pending"
+                            ? "bg-yellow-200 text-yellow-800"
+                            : assignment?.SubmitStatus === "Approved"
+                            ? "bg-green-200 text-green-800"
+                            : "bg-red-200 text-red-800"
+                        }`}
+                      >
+                        {assignment?.SubmitStatus || assignment.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+                      {assignment?.marks}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+                      {assignment?.submitMark || "N/A"}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+                      <span
+                        className="tooltip cursor-pointer"
+                        title={assignment?.feedback || "No feedback available"}
+                      >
+                        {assignment?.feedback
+                          ? assignment.feedback.length > 10
+                            ? assignment.feedback.substring(0, 10) + "..."
+                            : assignment.feedback
+                          : "No Feedback"}
+                      </span>
+                    </td>
                   </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800">
-                  {assignments.map((assignment) => (
-                    <tr key={assignment._id}>
-                      <td className="px-4 py-4 text-sm dark:text-white whitespace-nowrap">
-                        {assignment?.title}
-                      </td>
-                      <td className="px-4 py-4 text-sm whitespace-nowrap">
-                        <div className="flex items-center gap-x-2">
-                          <p>
-                            {assignment?.SubmitStatus ? assignment.SubmitStatus : assignment.status}
-                          </p>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 text-sm dark:text-white whitespace-nowrap">
-                        {assignment?.marks}
-                      </td>
-                      <td className="px-4 py-4 text-sm dark:text-white whitespace-nowrap">
-                        {assignment?.submitMark}
-                      </td>
-                      <td className="px-4 py-4 text-sm dark:text-white whitespace-nowrap">
-                        {assignment?.feedback?.substring(0, 5)}...
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan="5"
+                    className="px-6 py-4 text-center text-gray-500 dark:text-gray-400 text-sm"
+                  >
+                    No attempted assignments found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

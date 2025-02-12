@@ -5,9 +5,12 @@ import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
+import { ThemeContext } from "../../providers/ThemeProvider";
 
 const CreateAssignments = () => {
   const { user } = useContext(AuthContext);
+  const { isDarkMode } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   const [startDate, setStartDate] = useState(new Date());
@@ -39,7 +42,7 @@ const CreateAssignments = () => {
     };
 
     try {
-      // server site post request
+      // server-side post request
       await axios.post(
         `${import.meta.env.VITE_API_URL}/add-assignment`,
         formData
@@ -67,109 +70,142 @@ const CreateAssignments = () => {
   };
 
   return (
-    <div className="flex justify-center items-center text-black dark:bg-gray-900 dark:text-white py-16">
-      <section className=" p-2 md:p-6 mx-auto bg-white rounded-md shadow-md ">
-        <h2 className="text-lg font-semibold text-gray-700 capitalize text-center">
-          Post an Assignment
-        </h2>
+    <>
+      <Helmet>
+        <title>Assignment Buddy | Create Assignment</title>
+      </Helmet>
 
-        <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-            <div>
-              <label className="text-gray-700 " htmlFor="assignment_title">
-                Assignment Title
-              </label>
-              <input
-                id="assignment_title"
-                name="assignment_title"
-                type="text"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-              />
+      <div
+        className={`flex justify-center items-center py-16 ${
+          isDarkMode ? "dark bg-gray-900 text-white" : "bg-base-200 text-black"
+        }`}
+      >
+        <section className="p-4 sm:p-8 mx-auto bg-white dark:bg-gray-800 rounded-md shadow-md w-full max-w-4xl">
+          <h2 className="text-lg sm:text-2xl font-semibold text-gray-700 dark:text-gray-300 capitalize text-center">
+            Post an Assignment
+          </h2>
+
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+              <div className="col-span-2">
+                <label
+                  className="text-gray-700 dark:text-gray-300"
+                  htmlFor="assignment_title"
+                >
+                  Assignment Title
+                </label>
+                <input
+                  id="assignment_title"
+                  name="assignment_title"
+                  type="text"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <label
+                  className="text-gray-700 dark:text-gray-300"
+                  htmlFor="emailAddress"
+                >
+                  Email Address
+                </label>
+                <input
+                  id="emailAddress"
+                  type="email"
+                  name="email"
+                  defaultValue={user?.email}
+                  disabled={true}
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2 col-span-2">
+                <label className="text-gray-700 dark:text-gray-300">
+                  Assignment Deadline
+                </label>
+
+                {/* Date Picker Input Field */}
+                <DatePicker
+                  name="startDate"
+                  className="border text-black p-2 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label
+                  className="text-gray-700 dark:text-gray-300"
+                  htmlFor="difficulty_level"
+                >
+                  Difficulty Level
+                </label>
+                <select
+                  name="difficulty_level"
+                  id="difficulty_level"
+                  className="border text-black p-2 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                >
+                  <option value="easy">EASY</option>
+                  <option value="medium">MEDIUM</option>
+                  <option value="hard">HARD</option>
+                </select>
+              </div>
+
+              <div className="col-span-2">
+                <label
+                  className="text-gray-700 dark:text-gray-300"
+                  htmlFor="image_url"
+                >
+                  Image URL
+                </label>
+                <input
+                  id="image_url"
+                  name="image_url"
+                  type="url"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <label
+                  className="text-gray-700 dark:text-gray-300"
+                  htmlFor="assignment_mark"
+                >
+                  Assignments Marks
+                </label>
+                <input
+                  id="assignment_mark"
+                  name="assignment_mark"
+                  type="number"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                />
+              </div>
             </div>
-
-            <div>
-              <label className="text-gray-700 " htmlFor="emailAddress">
-                Email Address
-              </label>
-              <input
-                id="emailAddress"
-                type="email"
-                name="email"
-                defaultValue={user?.email}
-                disabled={true}
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="text-gray-700">Assignment Deadline</label>
-
-              {/* Date Picker Input Field */}
-              <DatePicker
-                name="startDate"
-                className="border text-black p-2 rounded-md"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2 ">
-              <label className="text-gray-700 " htmlFor="difficulty_level">
-                Difficulty Level
-              </label>
-              <select
-                name="difficulty_level"
-                id="difficulty_level"
-                className="border text-black p-2 rounded-md"
+            <div className="flex flex-col gap-2 mt-4">
+              <label
+                className="text-gray-700 dark:text-gray-300"
+                htmlFor="description"
               >
-                <option value="easy">EASY</option>
-                <option value="medium">MEDIUM</option>
-                <option value="hard">HARD</option>
-              </select>
-            </div>
-
-            <div className="col-span-2">
-              <label className="text-gray-700 " htmlFor="image_url">
-                Image URL
+                Description
               </label>
-              <input
-                id="image_url"
-                name="image_url"
-                type="url"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-              />
+              <textarea
+                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                name="description"
+                id="description"
+              ></textarea>
             </div>
-
-            <div className="col-span-2">
-              <label className="text-gray-700 " htmlFor="assignment_mark">
-                Assignments Marks
-              </label>
-              <input
-                id="assignment_mark"
-                name="assignment_mark"
-                type="number"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-              />
+            <div className="flex justify-end mt-6">
+              <button
+                type="submit"
+                className="w-full sm:w-auto px-8 py-2.5 leading-5 text-white transition-colors duration-300 bg-green-500 rounded-md hover:bg-green-400 focus:outline-none focus:bg-green-400"
+              >
+                Submit
+              </button>
             </div>
-          </div>
-          <div className="flex flex-col gap-2 mt-4">
-            <label className="text-gray-700 " htmlFor="description">
-              Description
-            </label>
-            <textarea
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-              name="description"
-              id="description"
-            ></textarea>
-          </div>
-          <div className="flex justify-end mt-6">
-            <button className="disabled:cursor-not-allowed px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-              Submit
-            </button>
-          </div>
-        </form>
-      </section>
-    </div>
+          </form>
+        </section>
+      </div>
+    </>
   );
 };
 

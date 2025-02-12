@@ -1,13 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import { Tooltip } from "react-tooltip";
 import { ThemeContext } from "../providers/ThemeProvider";
 import logo from '../assets/image/assignment-buddy.webp';
 
 const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
   const { toggleTheme, isDarkMode } = useContext(ThemeContext);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // Dropdown বন্ধ করার জন্য outside click detect করা
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(".dropdown-container")) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener("click", handleClickOutside);
+    } else {
+      document.removeEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   return (
     <nav className="w-full fixed top-0 left-0 z-50 bg-green-500 dark:bg-gray-800 shadow-md">
@@ -37,25 +56,36 @@ const Navbar = () => {
           </button>
 
           {user ? (
-            <div className="relative group">
-              <button className="flex items-center space-x-2">
+            <div className="relative dropdown-container">
+              {/* Avatar button */}
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="flex items-center space-x-2 focus:outline-none"
+              >
                 <img
                   src={user?.photoURL}
                   alt="User Avatar"
                   className="w-10 h-10 rounded-full border border-white"
                 />
               </button>
-              <div className="absolute right-0 mt-2 w-48 bg-green-500 dark:bg-gray-900 text-white shadow-lg rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Link to="/createAssignments" className="block px-4 py-2 hover:bg-green-600 rounded">
-                  Create Assignments
-                </Link>
-                <Link to="/attemptAssignments" className="block px-4 py-2 hover:bg-green-600 rounded">
-                  My Attempted Assignments
-                </Link>
-                <button onClick={logoutUser} className="w-full text-left px-4 py-2 hover:bg-red-600 rounded">
-                  Logout
-                </button>
-              </div>
+
+              {/* Dropdown Menu */}
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-green-500 dark:bg-gray-900 text-white shadow-lg rounded-lg p-2">
+                  <Link to="/createAssignments" className="block px-4 py-2 hover:bg-green-600 rounded">
+                    Create Assignments
+                  </Link>
+                  <Link to="/attemptAssignments" className="block px-4 py-2 hover:bg-green-600 rounded">
+                    My Attempted Assignments
+                  </Link>
+                  <button
+                    onClick={logoutUser}
+                    className="w-full text-left px-4 py-2 hover:bg-red-600 rounded"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <NavLink to="/login" className="text-white hover:text-gray-300">
