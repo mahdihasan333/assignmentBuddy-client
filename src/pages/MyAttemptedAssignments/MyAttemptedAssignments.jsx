@@ -29,17 +29,16 @@ const MyAttemptedAssignments = () => {
         <title>Assignment Buddy | My Attempted Assignments</title>
       </Helmet>
 
-      <div className="w-11/12 mt-8 mx-auto py-12">
+      <div className="w-full mt-8 px-4 py-12">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
             My Attempted Assignments
           </h2>
-          <span className="px-3 py-1 text-sm font-medium text-green-600 bg-green-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-            {assignments.length} Assignment{assignments.length !== 1 && "s"}
-          </span>
+          
         </div>
 
-        <div className="overflow-hidden border border-gray-300 dark:border-gray-700 rounded-lg shadow-md">
+        {/* Responsive Table */}
+        <div className="overflow-x-auto border border-gray-300 dark:border-gray-700 rounded-lg shadow-md">
           <table className="min-w-full text-left bg-white dark:bg-gray-800">
             <thead className="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-200">
               <tr>

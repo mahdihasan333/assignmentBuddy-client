@@ -161,7 +161,7 @@ const PendingAssignments = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-sm text-white bg-blue-600 rounded-md dark:bg-blue-500"
+                  className="px-4 py-2 text-sm text-white bg-green-600 rounded-md dark:bg-green-500"
                 >
                   Submit
                 </button>
