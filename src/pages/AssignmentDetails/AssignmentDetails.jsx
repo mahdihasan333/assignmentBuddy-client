@@ -92,61 +92,65 @@ const AssignmentDetails = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto dark:text-white card py-8 lg:card-side bg-base-100 shadow-xl transform transition-transform hover:scale-105 dark:bg-cyan-900">
-      <figure className=" w-full h-96 p-4 lg:w-2/4  overflow-auto">
-        <img
-          src={imageUrl}
-          alt="Assignment"
-          className="w-full  rounded-2xl h-full object-cover object-center transition-transform duration-300 hover:scale-110"
-        />
-      </figure>
-      <div className="card-body p-6 lg:p-8">
-        <h2 className="card-title text-2xl dark:text-white font-bold text-gray-800">{title}</h2>
-        {deadline && (
-          <p className="text-gray-600 dark:text-white text-sm mt-2">
-            <span className="font-semibold">Deadline:</span>{" "}
-            {format(new Date(deadline), "P")}
-          </p>
-        )}
-        <div className="flex items-center gap-10 mt-2 text-gray-700 dark:text-white">
-          <p className="font-medium">
-            <span className="text-gray-900 dark:text-white">Marks:</span>{" "}
-            {marks}
-          </p>
-          <p className="font-medium">
-            <span className="text-gray-900 dark:text-white">Difficulty:</span>{" "}
-            {difficulty}
-          </p>
-        </div>
-        <p className="mt-4 dark:text-white text-gray-700">{description}</p>
+    <div className="w-11/12 mx-auto py-8 mt-12">
+      <div className="lg:grid lg:grid-cols-2 lg:gap-8">
+        <figure className="w-full p-4 ">
+          <img
+            src={imageUrl}
+            alt="Assignment"
+            className="w-full rounded-2xl h-full object-cover object-center transition-transform duration-300 hover:scale-110"
+          />
+        </figure>
 
-        <div className="mt-6 max-w-fit border-2 p-4 ">
-          <h3 className="text-sm dark:text-white font-semibold text-gray-700">
-            Assignment Creator Details:
-          </h3>
-          <div className="flex items-center gap-4 mt-3">
-            <div>
-              <p className="text-sm dark:text-white text-gray-600">Name: {student?.name}</p>
-              <p className="text-sm dark:text-white text-gray-600">Email: {student?.email}</p>
-            </div>
-            <div className="rounded-full overflow-hidden w-14 h-14">
-              <img
-                referrerPolicy="no-referrer"
-                src={student?.photo}
-                alt="Student"
-                className="object-cover w-full h-full"
-              />
+        <div className="card-body p-6 lg:p-8 bg-gray-200 dark:bg-cyan-900 dark:text-white shadow-xl rounded-lg">
+          <h2 className="card-title text-2xl font-bold text-gray-800 dark:text-white">{title}</h2>
+          {deadline && (
+            <p className="text-gray-600 dark:text-white text-sm mt-2">
+              <span className="font-semibold">Deadline:</span>{" "}
+              {format(new Date(deadline), "P")}
+            </p>
+          )}
+          <div className="flex items-center gap-10 mt-2 text-gray-700 dark:text-white">
+            <p className="font-medium">
+              <span className="text-gray-900 dark:text-white">Marks:</span>{" "}
+              {marks}
+            </p>
+            <p className="font-medium">
+              <span className="text-gray-900 dark:text-white">Difficulty:</span>{" "}
+              {difficulty}
+            </p>
+          </div>
+          <p className="mt-4 dark:text-white text-gray-700">{description}</p>
+
+          <div className="mt-6 max-w-fit border-2 p-4">
+            <h3 className="text-sm dark:text-white font-semibold text-gray-700">
+              Assignment Creator Details:
+            </h3>
+            <div className="flex items-center gap-4 mt-3">
+              <div>
+                <p className="text-sm dark:text-white text-gray-600">Name: {student?.name}</p>
+                <p className="text-sm dark:text-white text-gray-600">Email: {student?.email}</p>
+              </div>
+              {/* Hide the image on mobile */}
+              <div className="hidden lg:block rounded-full overflow-hidden w-14 h-14">
+                <img
+                  referrerPolicy="no-referrer"
+                  src={student?.photo}
+                  alt="Student"
+                  className="object-cover w-full h-full"
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="card-actions justify-end mt-6">
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="btn btn-primary shadow-md hover:shadow-lg hover:bg-blue-700 transition-colors"
-          >
-            Take Assignment
-          </button>
+          <div className="card-actions justify-end mt-6">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="btn bg-green-500 shadow-md hover:shadow-lg hover:bg-green-700 transition-colors"
+            >
+              Take Assignment
+            </button>
+          </div>
         </div>
       </div>
 
@@ -186,7 +190,7 @@ const AssignmentDetails = () => {
                 ></textarea>
               </div>
               <div className="modal-action">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn bg-green-500">
                   Submit Assignment
                 </button>
               </div>
