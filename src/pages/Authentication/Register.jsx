@@ -1,14 +1,11 @@
-import Lottie from "react-lottie";
-import registerLottieData from "../../assets/lottie/Register.json";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useState } from "react";
 
 const Register = () => {
-  const [showPassword, setShowPassword] = useState();
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { createNewUser, setUser } = useContext(AuthContext);
 
@@ -16,7 +13,6 @@ const Register = () => {
     e.preventDefault();
 
     const form = e.target;
-
     const name = form.name.value;
     const email = form.email.value;
     const photo = form.photo.value;
@@ -26,30 +22,28 @@ const Register = () => {
       Swal.fire({
         icon: "error",
         title: "Oops",
-        text: "Password must be 6 character!",
+        text: "Password must be at least 6 characters!",
       });
       return;
     }
 
     const regex = /^(?=.*[A-Z])(?=.*[a-z]).+$/;
-
     if (!regex.test(password)) {
       Swal.fire({
         icon: "error",
         title: "Oops",
-        text: "Password Must have an Uppercase letter and a Lowercase letter in the password!",
+        text: "Password must have an uppercase and a lowercase letter!",
       });
       return;
     }
 
-    // authentication
     createNewUser(email, password)
       .then((result) => {
         const user = result.user;
         setUser(user);
         Swal.fire({
           title: "Success!",
-          text: "Register successful",
+          text: "Registration successful",
           icon: "success",
           confirmButtonText: "Ok",
         });
@@ -65,50 +59,6 @@ const Register = () => {
   };
 
   return (
-    // <div className="hero bg-base-200 min-h-screen">
-    //   <div className="hero-content flex-col lg:flex-row-reverse">
-    //     <div className="text-center lg:text-left w-80">
-    //       {/* <Lottie animationData={registerLottieData}></Lottie> */}
-    //     </div>
-    //     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-    //       <h1 className="ml-8 mt-4 text-5xl font-bold">Register now!</h1>
-    //       <form className="card-body">
-    //         <div className="form-control">
-    //           <label className="label">
-    //             <span className="label-text">Email</span>
-    //           </label>
-    //           <input
-    //             type="email"
-    //             name="email"
-    //             placeholder="email"
-    //             className="input input-bordered"
-    //             required
-    //           />
-    //         </div>
-    //         <div className="form-control">
-    //           <label className="label">
-    //             <span className="label-text">Password</span>
-    //           </label>
-    //           <input
-    //             type="password"
-    //             name="password"
-    //             placeholder="password"
-    //             className="input input-bordered"
-    //             required
-    //           />
-    //           <label className="label">
-    //             <a href="#" className="label-text-alt link link-hover">
-    //               Forgot password?
-    //             </a>
-    //           </label>
-    //         </div>
-    //         <div className="form-control mt-6">
-    //           <button className="btn btn-primary">Register</button>
-    //         </div>
-    //       </form>
-    //     </div>
-    //   </div>
-    // </div>
     <div className="bg-base-200">
       <div className="hero-content flex-col">
         <h1 className="text-5xl font-bold">Register now!</h1>
@@ -140,42 +90,41 @@ const Register = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">PhotoURL</span>
+                <span className="label-text">Photo URL</span>
               </label>
               <input
                 type="text"
-                placeholder="PhotoURL"
+                placeholder="Photo URL"
                 name="photo"
                 className="input input-bordered"
                 required
               />
             </div>
-
-            <div className="form-control">
+            <div className="form-control relative">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
-                placeholder="password"
-                className="input input-bordered"
+                placeholder="Password"
+                className="input input-bordered pr-10"
                 required
               />
               <button
                 onClick={() => setShowPassword(!showPassword)}
                 type="button"
-                className="btn btn-xs absolute right-11 top-[358px]"
+                className="absolute right-3 top-12 text-xl text-gray-600"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Register</button>
+              <button className="btn bg-green-500 text-white">Register</button>
             </div>
           </form>
           <p className="text-center p-5 font-semibold">
-            Already Have An Account ?{" "}
+            Already Have An Account?{" "}
             <Link className="text-green-500 hover:underline" to="/login">
               Login
             </Link>

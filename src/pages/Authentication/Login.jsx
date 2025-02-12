@@ -1,13 +1,12 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import google from "../../assets/image/Google.webp";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
-import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState()
+  const [showPassword, setShowPassword] = useState(false);
   const { loginUser, setUser, loginWithGoogle } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
@@ -42,7 +41,6 @@ const Login = () => {
   };
 
   // Google login
-
   const handleGoogleLogin = () => {
     loginWithGoogle()
       .then((result) => {
@@ -84,35 +82,30 @@ const Login = () => {
               />
             </div>
             
-            <div className="form-control">
+            <div className="form-control relative">
               <label className="label">
-                <span className="label-text-alt link link-hover">Password</span>
+                <span className="label-text">Password</span>
               </label>
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="password"
-                className="input input-bordered"
+                className="input input-bordered pr-10"
                 required
               />
               <button
                 onClick={() => setShowPassword(!showPassword)}
                 type="button"
-                className="btn btn-xs absolute right-11 top-44"
+                className="absolute right-3 top-12 text-xl text-gray-600"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
               <label className="label">
-                <a
-                  
-                  className="label-text-alt link link-hover"
-                >
-                  Forgot password?
-                </a>
+                <a className="label-text-alt link link-hover">Forgot password?</a>
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn bg-green-500">Login</button>
             </div>
             <div onClick={handleGoogleLogin} className="btn flex">
               <img className="h-10 w-10 rounded-full" src={google} alt="" />
