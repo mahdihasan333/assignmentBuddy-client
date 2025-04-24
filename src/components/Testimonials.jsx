@@ -38,7 +38,7 @@ const StarRating = ({ rating }) => {
 
 const Testimonials = () => {
   return (
-    <div className="w-11/12 mx-auto my-16 pb-12  text-center">
+    <div className="my-16 pb-12 text-center">
       <h2 className="text-3xl font-bold mb-8 dark:text-white">
         What Our Users Say
       </h2>
@@ -54,7 +54,7 @@ const Testimonials = () => {
         {testimonials.map((testimonial, index) => (
           <SwiperSlide
             key={index}
-            className="bg-white dark:bg-gray-800 p-6 shadow-lg rounded-lg flex flex-col items-center text-center"
+            className="bg-white dark:bg-gray-800 p-20 shadow-lg rounded-lg flex flex-col items-center text-center"
           >
             <div className="flex flex-col items-center justify-center">
               <img
