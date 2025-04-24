@@ -18,7 +18,7 @@ import slider4 from '../assets/image/slider4.avif'
 
 const Banner = () => {
   return (
-    <div className="w-11/12 py-10 mx-auto">
+    <div className="py-10">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
