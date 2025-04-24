@@ -108,7 +108,7 @@ const Login = () => {
               <button className="btn bg-green-500">Login</button>
             </div>
             <div onClick={handleGoogleLogin} className="btn flex">
-              <img className="h-10 w-10 rounded-full" src={google} alt="" />
+              <img className="h-10 w-10 rounded-full" src={google} alt="user profile" />
               <span>Login With Google</span>
             </div>
           </form>

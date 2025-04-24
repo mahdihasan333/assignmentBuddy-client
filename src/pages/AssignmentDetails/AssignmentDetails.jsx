@@ -97,7 +97,7 @@ const AssignmentDetails = () => {
         <figure className="w-full p-4 ">
           <img
             src={imageUrl}
-            alt="Assignment"
+            alt="Assignment picture"
             className="w-full rounded-2xl h-full object-cover object-center transition-transform duration-300 hover:scale-110"
           />
         </figure>
@@ -136,7 +136,7 @@ const AssignmentDetails = () => {
                 <img
                   referrerPolicy="no-referrer"
                   src={student?.photo}
-                  alt="Student"
+                  alt="Student picture"
                   className="object-cover w-full h-full"
                 />
               </div>
