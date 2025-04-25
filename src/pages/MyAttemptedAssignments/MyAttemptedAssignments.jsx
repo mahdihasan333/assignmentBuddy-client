@@ -29,7 +29,7 @@ const MyAttemptedAssignments = () => {
         <title>Assignment Buddy | My Attempted Assignments</title>
       </Helmet>
 
-      <div className="w-full mt-8 px-4 py-12">
+      <div className="w-11/12 mx-auto mt-8 py-12">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
             My Attempted Assignments
